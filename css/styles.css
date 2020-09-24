@@ -1,8 +1,12 @@
 body {
   background-image: url("../images/login-background.jpg");
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   text-align: center;
   font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
 }
 
 label {
@@ -39,6 +43,7 @@ label {
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
+  font-weight: bold;
 }
 
 .right {
