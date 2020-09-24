@@ -57,3 +57,14 @@ label {
 .center {
   text-align: center;
 }
+
+.register {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.register-link {
+  font-size: 0.8rem;
+  color: red;
+}
