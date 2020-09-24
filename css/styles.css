@@ -1,0 +1,54 @@
+body {
+  background-image: url("../images/login-background.jpg");
+  background-size: cover;
+  text-align: center;
+  font-family: 'Courier Prime', monospace;
+}
+
+label {
+  margin-top: 20px;
+}
+
+.main-heading {
+  color: white;
+  margin: 50px;
+  font-family: 'Lilita One', cursive;
+  font-size: 5rem;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.form {
+  color: white;
+  padding-top: 10rem;
+}
+
+.login-form {
+  width: 700px;
+  margin: auto;
+}
+
+.sub-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+}
+
+.button {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
