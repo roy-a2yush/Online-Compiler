@@ -80,7 +80,7 @@
     <div class="modal-body">
       <div class="card" style="margin-top:10px;">
         <div class="card-body">
-          <h5 class="card-title"> Enter here: </h5>
+          <h5 class="card-title"> Submit Status: </h5>
           <p class="bg-danger rounded p-3 text-white"> Success </p>
         </div>
       </div>
