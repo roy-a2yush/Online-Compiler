@@ -155,9 +155,10 @@
      <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/cobalt");
-    editor.session.setMode("ace/mode/javascript");
+    editor.session.setMode("ace/mode/c_cpp");
     editor.setShowPrintMargin(false);
     editor.setFontSize("12px");
+    var ext="c";
 </script>
    </div>
 </div>
@@ -165,10 +166,10 @@
 <!-- This is the strip at last giving user options to run, submit and choose languages -->
 <div class="container-fluid bg-dark" id ="bottom-tag" style="min-height:8vh; width:100%;padding:1vh;">
   <select class="bg-dark text-white rounded dropup" id="sel1">
-    <option>C</option>
-    <option>C++</option>
-    <option>Java</option>
-    <option>Python</option>
+    <option value="c">C</option>
+    <option value="cpp">C++</option>
+    <option value="java">Java</option>
+    <option value="py">Python</option>
   </select>
   <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP" id="Check" > <small><span class="text-white">Custom Run</span></small>
 <div class="float-right">
@@ -183,6 +184,22 @@
   }
   $('#customIP').on('hidden.bs.modal',function(){
     $('#customipcheck').prop('checked',false);
+  })
+  $('#sel1').change(function(){
+   var x = document.getElementById('sel1').value;
+   if(x=="cpp"){
+     ext="cpp";
+   }
+   if(x=="java"){
+     ext="java";
+     //console.log("java");
+     editor.session.setMode("ace/mode/java");
+   }
+   if(x=="py"){
+     ext="py";
+     //console.log("python");
+     editor.session.setMode("ace/mode/python");
+   }
   })
 </script>
 </body>
