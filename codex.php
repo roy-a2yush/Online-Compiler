@@ -54,12 +54,12 @@
       </button>
     </div>
     <div class="modal-body">
-      <div class="card" style="margin-top:10px;">
-        <div class="card-body">
-          <h5 class="card-title"> Enter here: </h5>
-          <input type="text" name = "cip" value= "" class ="form-control">
-        </div>
-      </div>
+      <div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Enter Your Testcase</span>
+  </div>
+  <textarea class="form-control" aria-label="With textarea"></textarea>
+</div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#runButton">Run</button>
