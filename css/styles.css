@@ -27,7 +27,7 @@ label {
 
 .form {
   color: white;
-  padding-top: 10rem;
+  padding-top: 5rem;
 }
 
 .login-form {
@@ -38,6 +38,7 @@ label {
 .sub-heading {
   font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
+  color: #FF8C00;
 }
 
 .button {
@@ -57,6 +58,10 @@ label {
 
 .center {
   text-align: center;
+}
+
+.error-pass {
+  border-color: red;
 }
 
 .register {
@@ -84,6 +89,10 @@ label {
 
 .no-opactity {
   opacity: 1;
+}
+
+.opacity-less {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .fixed {
