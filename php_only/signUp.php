@@ -9,10 +9,10 @@
     $phoneNo = trim($_POST['phoneNo']);
     $organisation = trim($_POST['organisation']);
     $password = trim($_POST['password']);
-    echo "$name\n$email\n$phoneNo\n$organisation\n$password";
-    $password = md5($password);
-    echo "\n$password"; }
-    /*
+    //echo "$name\n$email\n$phoneNo\n$organisation\n$password";
+    //$password = md5($password);
+    //echo "\n$password"; }
+
     //Checking if user already exists
     $query=$connection->prepare("select * from `user` where email=?");
     $query->bind_param('s',$email);
@@ -25,7 +25,7 @@
       //if no user already exists, adding this user
       $password = md5($password);
       $query=$connection->prepare("INSERT INTO `user`(`name`, `email`, `phoneNo`, `organisation`, `password`) VALUES (?,?,?,?,?)");
-      $query->bind_param('ssssss',$name,$email,$phoneNo,$organisation,$password);
+      $query->bind_param('sssss',$name,$email,$phoneNo,$organisation,$password);
       $query->execute();
       $error = "Account created!<br>Login.";
       header("Location: ../index.php?error=$error");
@@ -34,5 +34,5 @@
     $error = "Something went Wrong!<br>Please Try Again!";
     header("Location: ../index.php?error=$error");
   }
-*/
+
 ?>
