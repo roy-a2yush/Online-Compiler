@@ -120,19 +120,19 @@
   <div class="col-12 col-md-5 col-lg-5" style="padding-top:10px; height:84vh;overflow-y:auto;">
      <div class="card shadow" >
        <div class="card-body">
-         <h5 class="card-title"> Problem: </h5>
+         <h5 class="card-title"> Problem-Name: </h5>
          <p class"card-text"> This is problem name </p>
        </div>
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
-         <h5 class="card-title"> Problem: </h5>
-         <p class"card-text"> This is problem name </p>
+         <h5 class="card-title"> Problem-Description: </h5>
+         <p class"card-text"> This is problem description </p>
        </div>
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
-         <h5 class="card-title"> Problem: </h5>
+         <h5 class="card-title"> Constraints: </h5>
          <p class"card-text"> This is problem name </p>
        </div>
      </div>
