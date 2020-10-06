@@ -16,6 +16,7 @@ label {
 .main-heading {
   color: white;
   margin: 50px;
+  margin-bottom: 10px;
   font-family: 'Lilita One', cursive;
   font-size: 5rem;
 }
@@ -67,4 +68,46 @@ label {
 .register-link {
   font-size: 0.8rem;
   color: red;
+}
+
+.card-sub-heading {
+  font-size: 2rem;
+}
+
+.option-card {
+  width: 50%;
+  margin: 50px auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  color: white;
+}
+
+.no-opactity {
+  opacity: 1;
+}
+
+.fixed {
+  position: fixed;
+  margin: auto;
+  width: 100%;
+  margin-top: 0;
+}
+
+.dashboard-header {
+  margin-top: 0px;
+  padding-top: 130px;
+}
+
+.navbar {
+  z-index: 1;
+}
+
+.nav-item {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  font-size: 1.7rem;
 }
