@@ -35,7 +35,7 @@
           </div>
           <div class="carousel-item" id="reg">
             <h1 class="sub-heading">Register:</h1>
-            <form action="only_php/signUp.php" method="post">
+            <form action="php_only/signUp.php" method="post">
               <div class="row login-form">
                 <div class="col-lg-6 right">
                   <div class="center">
@@ -61,7 +61,7 @@
                     <br>
                     <label>Organisation:</label>
                     <br>
-                    <input type="text" name="org" value="" required>
+                    <input type="text" name="organisation" required>
                     <br>
                     <label>Re-enter password: </label>
                     <br>
