@@ -66,11 +66,11 @@
   <div class="input-group-prepend">
     <span class="input-group-text">Enter Your Testcase</span>
   </div>
-  <textarea class="form-control" aria-label="With textarea"></textarea>
+  <textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
 </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#runButton">Run</button>
+      <button type="button" class="btn btn-secondary" id="RunWithIP" data-dismiss="modal" data-toggle="modal" data-target="#runButton">Run</button>
     </div>
   </div>
 </div>
@@ -100,7 +100,7 @@
 </div>
 </div>
 <!-- This is navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:8vh;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id = "nav">
   <a class="navbar-brand" href="dashboard.html">codeSmode</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -212,7 +212,7 @@
 </div>
 </div>
 <!-- This is the strip at last giving user options to run, submit and choose languages -->
-<div class="container-fluid bg-dark" id ="bottom-tag" style="min-height:8vh; width:100%;padding:1vh;">
+<div class="container-fluid bg-dark" id ="bottom-tag" style="width:100%;padding:1vh;">
   <select class="bg-dark text-white rounded dropup" id="sel1">
     <option value="c">C</option>
     <option value="cpp">C++</option>
@@ -230,6 +230,20 @@
     var x = editor.getValue();
     console.log(x);
   }
+  var heightofnav = document.getElementById('nav').offsetHeight;
+  var h = window.innerHeight;
+  var vhh = (heightofnav/h)*100;
+  //console.log('nav ka vhh is '+vhh);
+  var res= 16-vhh;
+  document.getElementById('bottom-tag').style.height= res+"vh";
+  $(window).resize(function(){
+    var heightofnav = document.getElementById('nav').offsetHeight;
+    var h = window.innerHeight;
+    var vhh = (heightofnav/h)*100;
+    console.log('nav ka vhh is '+vhh);
+    var res= 16-vhh;
+    document.getElementById('bottom-tag').style.height= res+"vh";
+});
   $('#customIP').on('hidden.bs.modal',function(){
     $('#customipcheck').prop('checked',false);
   })
