@@ -15,11 +15,11 @@
       $result=$query->get_result();
       if(mysqli_num_rows($result) == 1) {
         $row=mysqli_fetch_assoc($result);
-        $_SESSION['uid'] = row['uid'];
-        $_SESSION['name'] = row['name'];
-        $_SESSION['email'] = row['email'];
-        $_SESSION['phoneNo'] = row['phoneNo'];
-        $_SESSION['organisation'] = row['organisation'];
+        $_SESSION['uid'] = $row['uid'];
+        $_SESSION['name'] = $row['name'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['phoneNo'] = $row['phoneNo'];
+        $_SESSION['organisation'] = $row['organisation'];
         header("Location: ../dashboard.html");
       } else {
         $error ='Invalid Login Credentials';
@@ -28,6 +28,6 @@
     }
   } else {
     $error= "Enter valid username and password";
-    //header("Location: ../index.php?error=$error");
+    header("Location: ../index.php?error=$error");
   }
 ?>

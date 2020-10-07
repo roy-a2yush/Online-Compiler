@@ -1,3 +1,11 @@
+<?php
+
+  //starting session
+  session_start();
+  $pid = $_GET['pid'];
+  include "php_only/codex_Question.php";
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,31 +129,71 @@
      <div class="card shadow" >
        <div class="card-body">
          <h5 class="card-title"> Problem-Name: </h5>
-         <p class"card-text"> This is problem name </p>
+         <p class"card-text">
+           <?php
+
+            //printing problem name
+            $pName = $_SESSION['pName'];
+            echo "$pName";
+
+           ?>
+         </p>
        </div>
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Problem-Description: </h5>
-         <p class"card-text"> This is problem description </p>
+         <p class"card-text">
+           <?php
+
+            //printing problem Description
+            $pDesc = $_SESSION['pDesc'];
+            echo "$pDesc";
+
+           ?>
+         </p>
        </div>
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Constraints: </h5>
-         <p class"card-text"> This is problem name </p>
+         <p class"card-text">
+           <?php
+
+            //printing problem Constraints
+            $constraints = $_SESSION['constraints'];
+            echo "$constraints";
+
+           ?>
+         </p>
        </div>
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Sample input </h5>
-         <p class"card-text"> This is sample ip </p>
+         <p class"card-text">
+           <?php
+
+            //printing sample Input
+            $sampleInput = $_SESSION['sampleInput'];
+            echo "$sampleInput";
+
+           ?>
+         </p>
        </div>
      </div>
      <div class="card shadow" style="margin-top:10px;margin-bottom:10px;">
        <div class="card-body">
          <h5 class="card-title"> Sample output </h5>
-         <p class"card-text"> This is sample op </p>
+         <p class"card-text">
+           <?php
+
+            //printing sample Output
+            $sampleOutput = $_SESSION['sampleOutput'];
+            echo "$sampleOutput";
+
+           ?>
+         </p>
        </div>
      </div>
   </div>
