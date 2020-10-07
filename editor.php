@@ -194,6 +194,9 @@ function ajax_run(code,ip,ext) {
 $('#RunWithIP').click(function(){
   var prog = editor.getSession().getValue();
   var ip = document.getElementById('ip').value;
+  if(ip.trim()==""){
+    ip="No input";
+  }
   ajax_run(prog,ip,ext);
   $('#runButton').on('shown.bs.modal',function(){
     $('#inputText').text(ip);
