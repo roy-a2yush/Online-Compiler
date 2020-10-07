@@ -1,48 +1,56 @@
 <?php
- putenv("PATH=C:\Windows");
-	$CC="py";
-	//$out="./a.out";
-	$code=$_POST["code"];
-	$input=$_POST["textIP"];
-	$filename_code="main.py";
-	$filename_in="input.txt";
-	$filename_error="error.txt";
-	//$executable="a.out";
-	$command=$CC." ".$filename_code;
-	$command_error=$command." 2>".$filename_error;
-
-	//if(trim($code)=="")
-	//die("The code area is empty");
-
-	$file_code=fopen($filename_code,"w+");
-	fwrite($file_code,$code);
-	fclose($file_code);
-	$file_in=fopen($filename_in,"w+");
-	fwrite($file_in,$input);
-	fclose($file_in);
-	//exec("chmod 777 $executable");
-	exec("chmod 777 $filename_error");
-
-	shell_exec($command_error);
-	$error=file_get_contents($filename_error);
-
-	if(trim($error)=="")
-	{
-		if(trim($input)=="")
-		{
-			$output=shell_exec($command);
-		}
-		else
-		{
-			$command=$command." < ".$filename_in;
-			$output=shell_exec($command);
-		}
-		echo nl2br("$output");
-	}
-	else
-	{
-		echo nl2br("<pre>$error</pre>");
-	}
-	exec("rm $filename_code");
-	exec("rm *.txt");
+class codeWithPython{
+  public $unid,$CC,$code,$input,$filename_code,$filename_in,$filename_error,$command,$command_error,$error;
+  function __construct($co){
+    putenv("PATH=C:\Windows");
+    $unid = uniqid();
+    $this->CC="py";
+  	//$out="./a.out";
+  	$this->code=$co;
+  	$this->filename_code="main".$this->unid.".py";
+  	$this->filename_in="input".$this->unid.".txt";
+  	$this->filename_error="error".$this->unid.".txt";
+  	$this->command=$this->CC." ".$this->filename_code;
+  	$this->command_error=$this->command." 2>".$this->filename_error;
+  	$file_code=fopen($this->filename_code,"w+");
+  	fwrite($file_code,$this->code);
+  	fclose($file_code);
+ }
+  function writeInput($ip){
+    $this->input=$ip;
+  	$file_in=fopen($this->filename_in,"w+");
+  	fwrite($file_in,$this->input);
+  	fclose($file_in);
+  }
+  function compile(){
+  	shell_exec($this->command_error);
+  	$this->error=file_get_contents($this->filename_error);
+  }
+  function execute($showOutput=true){
+  	if(trim($this->error)=="")
+  	{
+  		if(trim($this->input)=="")
+  		{
+  			$output=shell_exec($this->command);
+  		}
+  		else
+  		{
+  			$this->command=$this->command." < ".$this->filename_in;
+  			$output=shell_exec($this->command);
+  		}
+      if($showOutput)
+  		echo nl2br("$output");
+  	}
+  	else
+  	{
+  		echo nl2br("<pre>$this->error</pre>");
+      $output = "error";
+  	}
+    return $output;
+ }
+ function clearFiles(){
+	exec("del $this->filename_code");
+	exec("del *.txt");
+ }
+}
 ?>

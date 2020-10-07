@@ -1,9 +1,9 @@
 <?php
 
   //starting session
-  session_start();
-  $pid = $_GET['pid'];
-  include "php_only/codex_Question.php";
+//  session_start();
+//  $pid = $_GET['pid'];
+//  include "php_only/codex_Question.php";
 
  ?>
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"> Input: </h5>
-            <p class"card-text"> 123456 </p>
+            <p class"card-text"> </p>
           </div>
         </div>
         <div class="card" style="margin-top:10px;">
@@ -125,16 +125,16 @@
 <!-- This contains two coloumns , left for displaying code related information and editor on the right side -->
   <div class="container-fluid">
   <div class="row">
-  <div class="col-12 col-md-5 col-lg-5" style="padding-top:10px; height:84vh;overflow-y:auto;">
+  <div class="col-12 col-md-5 col-lg-5" style="padding-top:10px;height:84vh;overflow-y:auto;">
      <div class="card shadow" >
        <div class="card-body">
-         <h5 class="card-title"> Problem-Name: </h5>
+         <h5 class="card-title"> Problem Name: </h5>
          <p class"card-text">
            <?php
 
             //printing problem name
-            $pName = $_SESSION['pName'];
-            echo "$pName";
+          //  $pName = $_SESSION['pName'];
+          //  echo "$pName";
 
            ?>
          </p>
@@ -142,13 +142,13 @@
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
-         <h5 class="card-title"> Problem-Description: </h5>
+         <h5 class="card-title"> Problem Description: </h5>
          <p class"card-text">
            <?php
 
             //printing problem Description
-            $pDesc = $_SESSION['pDesc'];
-            echo "$pDesc";
+          //  $pDesc = $_SESSION['pDesc'];
+          //  echo "$pDesc";
 
            ?>
          </p>
@@ -161,8 +161,8 @@
            <?php
 
             //printing problem Constraints
-            $constraints = $_SESSION['constraints'];
-            echo "$constraints";
+        //    $constraints = $_SESSION['constraints'];
+        //    echo "$constraints";
 
            ?>
          </p>
@@ -170,13 +170,13 @@
      </div>
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
-         <h5 class="card-title"> Sample input </h5>
+         <h5 class="card-title"> Sample Input </h5>
          <p class"card-text">
            <?php
 
             //printing sample Input
-            $sampleInput = $_SESSION['sampleInput'];
-            echo "$sampleInput";
+        //    $sampleInput = $_SESSION['sampleInput'];
+        //    echo "$sampleInput";
 
            ?>
          </p>
@@ -184,13 +184,13 @@
      </div>
      <div class="card shadow" style="margin-top:10px;margin-bottom:10px;">
        <div class="card-body">
-         <h5 class="card-title"> Sample output </h5>
+         <h5 class="card-title"> Sample Output </h5>
          <p class"card-text">
            <?php
 
             //printing sample Output
-            $sampleOutput = $_SESSION['sampleOutput'];
-            echo "$sampleOutput";
+        //    $sampleOutput = $_SESSION['sampleOutput'];
+        //    echo "$sampleOutput";
 
            ?>
          </p>
@@ -263,6 +263,33 @@
      editor.session.setMode("ace/mode/python");
    }
   })
+  function ajax_run(code,ip,ext) {
+        var hr = new XMLHttpRequest();
+        var url = "php_only/runcode.php";
+        var vars = "code=" + encodeURIComponent(code) + "&textIP=" + ip+ "&ext=" + ext;
+        hr.open("POST", url, true);
+        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        hr.onreadystatechange = function() {
+          if (hr.readyState == 4 && hr.status == 200) {
+            var return_data = hr.responseText;
+            $("#outputText").html(return_data);
+          }
+        }
+        hr.send(vars); // Actually execute the request
+        $("#outputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
+      }
+  $('#RunWithIP').click(function(){
+    var prog = editor.getSession().getValue();
+    var ip = document.getElementById('ip').value;
+    if(ip.trim()==""){
+      ip="No input";
+    }
+    ajax_run(prog,ip,ext);
+    $('#runButton').on('shown.bs.modal',function(){
+      $('#inputText').text(ip);
+    })
+   })
+
 </script>
 </body>
 </html>

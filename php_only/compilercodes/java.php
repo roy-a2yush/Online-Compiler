@@ -1,75 +1,83 @@
 <?php
-
+class codeWithJava{
+  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$runtime_file,$executable,$command,$command_error,$runtime_error_command,$error;
+  function __construct($co){
+    $this->unid= uniqid();
     putenv("PATH=C:\Program Files\Java\jdk1.8.0_221\bin");
-	$CC="javac";
-	$out="java Main";
-	$code=$_POST["code"];
-	$input=$_POST["textIP"];
-	$filename_code="Main.java";
-	$filename_in="input.txt";
-	$filename_error="error.txt";
-	$runtime_file="runtime.txt";
-	$executable="*.class";
-	$command=$CC." ".$filename_code;
-	$command_error=$command." 2>".$filename_error;
-	$runtime_error_command=$out." 2>".$runtime_file;
-
-	//if(trim($code)=="")
-	//die("The code area is empty");
-
-	$file_code=fopen($filename_code,"w+");
-	fwrite($file_code,$code);
-	fclose($file_code);
-	$file_in=fopen($filename_in,"w+");
-	fwrite($file_in,$input);
+  	$this->CC="javac";
+  	$this->out="java Main";
+  	$this->code=$co;
+  	$this->filename_code="Main".$this->unid.".java";
+  	$this->filename_in="input".$this->unid.".txt";
+  	$this->filename_error="error".$this->unid.".txt";
+  	$this->runtime_file="runtime".$this->unid.".txt";
+  	$this->executable="Main".$this->unid.".class";
+  	$this->command=$this->CC." ".$this->filename_code;
+  	$this->command_error=$this->command." 2>".$this->filename_error;
+  	$this->runtime_error_command=$this->out." 2>".$this->runtime_file;
+  	$file_code=fopen($this->filename_code,"w+");
+  	fwrite($file_code,$this->code);
+  	fclose($file_code);
+  }
+ function writeInput($ip){
+  $this->input=$ip;
+	$file_in=fopen($this->filename_in,"w+");
+	fwrite($file_in,$this->input);
 	fclose($file_in);
-	exec("cacls  $executable /g everyone:f");
-	exec("cacls  $filename_error /g everyone:f");
+ }
 
-	shell_exec($command_error);
-	$error=file_get_contents($filename_error);
-
-	if(trim($error)=="")
-	{
-		if(trim($input)=="")
-		{
-			shell_exec($runtime_error_command);
-			$runtime_error=file_get_contents($runtime_file);
-			$output=shell_exec($out);
-		}
-		else
-		{
-			shell_exec($runtime_error_command);
-			$runtime_error=file_get_contents($runtime_file);
-			$out=$out." < ".$filename_in;
-			$output=shell_exec($out);
-		}
-		//echo "<pre>$runtime_error</pre>";
-		//echo "<pre>$output</pre>";
-		echo nl2br("$output");
-		  //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
-	}
-	else if(!strpos($error,"error"))
-	{
-		echo "<pre>$error</pre>";
-		if(trim($input)=="")
-		{
-			$output=shell_exec($out);
-		}
-		else
-		{
-			$out=$out." < ".$filename_in;
-			$output=shell_exec($out);
-		}
-		//echo "<pre>$output</pre>";
-		echo nl2br("$output");
-		  //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
-	}
-	else
-	{
-		echo nl2br("<pre>$error</pre>");
-	}
-	exec("del $filename_code");
-	exec("del *.txt");
-	exec("del $executable");
+ function compile(){
+  	shell_exec($this->command_error);
+  	$this->error=file_get_contents($this->filename_error);
+ }
+ function execute($showOutput=true){
+  	if(trim($this->error)=="")
+  	{
+  		if(trim($this->input)=="")
+  		{
+  			shell_exec($this->runtime_error_command);
+  			$runtime_error=file_get_contents($this->runtime_file);
+  			$output=shell_exec($this->out);
+  		}
+  		else
+  		{
+  			shell_exec($this->runtime_error_command);
+  			$this->runtime_error=file_get_contents($this->runtime_file);
+  			$this->out=$this->out." < ".$this->filename_in;
+  			$output=shell_exec($this->out);
+  		}
+  		if($showOutput)
+  		echo nl2br("$output");
+  		  //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
+  	}
+  	else if(!strpos($this->error,"error"))
+  	{
+      if($showOutput)
+  		echo "<pre>$this->error</pre>";
+  		if(trim($this->input)=="")
+  		{
+  			$output=shell_exec($this->out);
+  		}
+  		else
+  		{
+  			$this->out=$this->out." < ".$this->filename_in;
+  			$output=shell_exec($this->out);
+  		}
+  		if($showOutput)
+  		echo nl2br("$output");
+  	}
+  	else if($showOutput)
+  	{
+  		echo nl2br("<pre>$this->error</pre>");
+      $output="error";
+  	}
+    return $output;
+  }
+  function clearFiles(){
+  	exec("del $this->filename_code");
+  	exec("del *.txt");
+    exec("del Main.class");
+  	exec("del $this->executable");
+  }
+}
 ?>
