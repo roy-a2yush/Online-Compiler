@@ -1,9 +1,15 @@
 <?php
 class codeWithJava{
-  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$runtime_file,$executable,$command,$command_error,$runtime_error_command,$error;
+  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$runtime_file,$executable,$command,$command_error,$runtime_error_command,$error,$isWindows;
   function __construct($co){
-    $this->unid= uniqid();
+    $os = php_uname();
+    $this->isWindows=false;
+    if(strpos($os,"Windows") === 0){
+      $this->isWindows = true;
+    }
+    if($this->isWindows)
     putenv("PATH=C:\Program Files\Java\jdk1.8.0_221\bin");
+    $this->unid= uniqid();
   	$this->CC="javac";
   	$this->out="java Main";
   	$this->code=$co;
@@ -74,10 +80,20 @@ class codeWithJava{
     return $output;
   }
   function clearFiles(){
-  	exec("del $this->filename_code");
-  	exec("del *.txt");
-    exec("del Main.class");
-  	exec("del $this->executable");
+    if($this->isWindows){
+    	exec("del $this->filename_code");
+    	exec("del $this->runtime_file");
+      exec("del $this->filename_in");
+      exec("del $this->filename_error");
+    	exec("del $this->executable");
+    }
+    else {
+      exec("rm $this->filename_code");
+    	exec("rm $this->runtime_file");
+      exec("rm $this->filename_in");
+      exec("rm $this->filename_error");
+    	exec("rm $this->executable");
+    }
   }
 }
 ?>

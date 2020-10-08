@@ -1,11 +1,21 @@
 <?php
 class codeWithPython{
-  public $unid,$CC,$code,$input,$filename_code,$filename_in,$filename_error,$command,$command_error,$error;
+  public $unid,$CC,$code,$input,$filename_code,$filename_in,$filename_error,$command,$command_error,$error,$isWindows;
   function __construct($co){
-    putenv("PATH=C:\Windows");
-    $unid = uniqid();
-    $this->CC="py";
+    $os = php_uname();
+    $this->isWindows=false;
+    if(strpos($os,"Windows") === 0){
+      $this->isWindows = true;
+    }
+    if($this->isWindows){
+      putenv("PATH=C:\Windows");
+      $this->CC="py";
+    }
+    else{
+      $this->CC="python3";
+    }
   	//$out="./a.out";
+    $unid = uniqid();
   	$this->code=$co;
   	$this->filename_code="main".$this->unid.".py";
   	$this->filename_in="input".$this->unid.".txt";
@@ -49,8 +59,16 @@ class codeWithPython{
     return $output;
  }
  function clearFiles(){
-	exec("del $this->filename_code");
-	exec("del *.txt");
+  if($this->isWindows){
+  	exec("del $this->filename_code");
+  	exec("del $this->filename_in");
+    exec("del $this->filename_error");
+  }
+  else{
+    exec("rm $this->filename_code");
+  	exec("rm $this->filename_in");
+    exec("rm $this->filename_error");
+  }
  }
 }
 ?>
