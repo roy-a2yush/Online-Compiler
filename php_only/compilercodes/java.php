@@ -7,9 +7,15 @@ class codeWithJava{
     if(strpos($os,"Windows") === 0){
       $this->isWindows = true;
     }
-    if($this->isWindows)
-    putenv("PATH=C:\Program Files\Java\jdk1.8.0_221\bin");
+    if($this->isWindows){
+      putenv("PATH=C:\Program Files\Java\jdk1.8.0_221\bin");
+    }
+    else {
+      chroot(getcwd());
+    }
     $this->unid= uniqid();
+    mkdir($this->unid);
+    chdir($this->unid);
   	$this->CC="javac";
   	$this->out="java Main";
   	$this->code=$co;
@@ -17,7 +23,7 @@ class codeWithJava{
   	$this->filename_in="input".$this->unid.".txt";
   	$this->filename_error="error".$this->unid.".txt";
   	$this->runtime_file="runtime".$this->unid.".txt";
-  	$this->executable="Main".$this->unid.".class";
+  	$this->executable="Main.class";
   	$this->command=$this->CC." ".$this->filename_code;
   	$this->command_error=$this->command." 2>".$this->filename_error;
   	$this->runtime_error_command=$this->out." 2>".$this->runtime_file;
@@ -86,6 +92,8 @@ class codeWithJava{
       exec("del $this->filename_in");
       exec("del $this->filename_error");
     	exec("del $this->executable");
+      chdir("..");
+      rmdir($this->unid);
     }
     else {
       exec("rm $this->filename_code");
@@ -93,6 +101,8 @@ class codeWithJava{
       exec("rm $this->filename_in");
       exec("rm $this->filename_error");
     	exec("rm $this->executable");
+      chdir("..");
+      rmdir($this->unid);
     }
   }
 }

@@ -13,6 +13,7 @@ class codeWithPython{
     }
     else{
       $this->CC="python3";
+      chroot(getcwd());
     }
   	//$out="./a.out";
     $unid = uniqid();

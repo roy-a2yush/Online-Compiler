@@ -9,7 +9,9 @@ class codeWithC{
         }
         if($this->isWindows)
         putenv("PATH=C:\Program Files (x86)\CodeBlocks\MinGW\bin");
-
+        else {
+          chroot(getcwd());
+        }
         $this->unid = uniqid();
     	  $this->CC="gcc";
         if($this->isWindows)
