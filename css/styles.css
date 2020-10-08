@@ -100,6 +100,8 @@ label {
   margin: auto;
   width: 100%;
   margin-top: 0;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 
 .dashboard-header {
@@ -117,6 +119,15 @@ label {
 }
 
 .navbar-brand {
-  padding-left: 20px;
+  padding-left: 18px;
   font-size: 1.7rem;
+}
+
+.problem-card {
+  text-align: center;
+  width: 95rem;
+  margin: 50px auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  color: white;
 }

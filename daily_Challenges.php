@@ -44,53 +44,13 @@
   </nav>
 
   <!-- main heading -->
-  <h1 class="main-heading dashboard-header">Dashboard</h1>
+  <h1 class="main-heading dashboard-header">Daily Challenges</h1>
 
-  <!-- 3 cards -->
-  <!-- 1st Card -->
-  <div class="card text-center option-card">
-    <div class="card-header sub-heading card-sub-heading no-opactity">
-      Online Compiler
-    </div>
-    <div class="card-body">
-      <h5 class="card-title no-opactity">Head to our online Compiler</h5>
-      <p class="card-text no-opactity">Right now we support coding in 4 languages, namely C, C++, Java and Python.</p>
-      <div class="no-opactity"><a href="codex.php" class="btn btn-primary">Go somewhere</a></div>
-    </div>
-    <div class="card-footer text-muted no-opactity">
-      2 days ago
-    </div>
+  <!-- Jumbotron for problems -->
+  <div class="jumbotron problem-card">
+    <h1 class="display-4 sub-heading">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="codex.php?pid=1" role="button">Solve</a>
   </div>
-
-  <!-- 2nd Card -->
-  <div class="card text-center option-card">
-    <div class="card-header sub-heading card-sub-heading">
-      Daily Challenges
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="daily_Challenges.php" class="btn btn-primary">Go somewhere</a>
-    </div>
-    <div class="card-footer text-muted">
-      2 days ago
-    </div>
-  </div>
-
-  <!-- 3rd Card -->
-  <div class="card text-center option-card">
-    <div class="card-header sub-heading card-sub-heading">
-      Saved Programs
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    <div class="card-footer text-muted">
-      2 days ago
-    </div>
-  </div>
-</body>
-
-</html>
