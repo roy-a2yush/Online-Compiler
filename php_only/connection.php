@@ -7,4 +7,5 @@
    $conn = $db;
    $connection = $db;
    $con = $db;
+   $conn =$db;
 ?>
