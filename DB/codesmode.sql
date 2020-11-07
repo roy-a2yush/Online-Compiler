@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2020 at 03:11 PM
+-- Generation Time: Nov 07, 2020 at 11:36 AM
 -- Server version: 10.4.13-MariaDB
--- PHP Version: 7.2.31
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,6 +47,22 @@ INSERT INTO `problems` (`pid`, `pName`, `pDesc`, `constraints`, `sampleInput`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `qid` int(100) NOT NULL,
+  `qname` varchar(500) NOT NULL,
+  `question` varchar(1000) NOT NULL,
+  `ccode` varchar(1000) NOT NULL,
+  `testcase1` varchar(50) NOT NULL,
+  `testcase2` varchar(50) NOT NULL,
+  `testcase3` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -78,6 +94,12 @@ ALTER TABLE `problems`
   ADD PRIMARY KEY (`pid`);
 
 --
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`qid`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -92,6 +114,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `problems`
   MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `qid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `user`
