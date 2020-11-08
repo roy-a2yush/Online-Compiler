@@ -35,13 +35,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"> Input: </h5>
-            <p class"card-text"> </p>
+            <p class="card-text"> </p>
           </div>
         </div>
         <div class="card" style="margin-top:10px;">
           <div class="card-body">
             <h5 class="card-title"> Output: </h5>
-            <p class"card-text"> 123456 </p>
+            <p class="card-text"> 123456 </p>
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
      <div class="card shadow" >
        <div class="card-body">
          <h5 class="card-title"> Problem Name: </h5>
-         <p class"card-text">
+         <p class="card-text">
            <?php
 
             //printing problem name
@@ -143,7 +143,7 @@
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Problem Description: </h5>
-         <p class"card-text">
+         <p class="card-text">
            <?php
 
             //printing problem Description
@@ -157,7 +157,7 @@
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Constraints: </h5>
-         <p class"card-text">
+         <p class="card-text">
            <?php
 
             //printing problem Constraints
@@ -171,7 +171,7 @@
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Sample Input </h5>
-         <p class"card-text">
+         <p class="card-text">
            <?php
 
             //printing sample Input
@@ -185,7 +185,7 @@
      <div class="card shadow" style="margin-top:10px;margin-bottom:10px;">
        <div class="card-body">
          <h5 class="card-title"> Sample Output </h5>
-         <p class"card-text">
+         <p class="card-text">
            <?php
 
             //printing sample Output

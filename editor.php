@@ -77,13 +77,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"> Input: </h5>
-            <p class"card-text" id="inputText"> 123456 </p>
+            <p class="card-text" id="inputText"></p>
           </div>
         </div>
         <div class="card" style="margin-top:10px;">
           <div class="card-body">
             <h5 class="card-title"> Output: </h5>
-            <p class"card-text" id="outputText"> 123456 </p>
+            <p class="card-text" id="outputText"></p>
           </div>
         </div>
       </div>
