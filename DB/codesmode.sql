@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2020 at 11:36 AM
+-- Generation Time: Nov 09, 2020 at 10:03 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -57,8 +57,17 @@ CREATE TABLE `questions` (
   `ccode` varchar(1000) NOT NULL,
   `testcase1` varchar(50) NOT NULL,
   `testcase2` varchar(50) NOT NULL,
-  `testcase3` varchar(50) NOT NULL
+  `testcase3` varchar(50) NOT NULL,
+  `notest` int(50) DEFAULT NULL,
+  `constraints` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`qid`, `qname`, `question`, `ccode`, `testcase1`, `testcase2`, `testcase3`, `notest`, `constraints`) VALUES
+(42, 'A', 'aa', 's', '', '', '', 1, 's');
 
 -- --------------------------------------------------------
 
@@ -119,7 +128,7 @@ ALTER TABLE `problems`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `qid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `qid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `user`
