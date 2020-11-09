@@ -14,6 +14,8 @@ if(isset($_GET['id'])){
     $qname = $row["qname"];
     $ques = $row["question"];
     $ccode = $row["ccode"];
+    $notest = $row["notest"];
+    $constraints = $row["constraints"];
   }  
 }
 ?>
@@ -81,11 +83,24 @@ if(isset($_GET['id'])){
                     </div>
             </div>
             <div class="form-group row">
+                    <label class="col-2 col-form-label">Constraints</label>
+                    <div class="col-10">
+                       <textarea id="constraints" name="constraints" rows="10" cols="120" required><?php if(isset($constraints)) {echo $constraints ;} ?></textarea> 
+                    </div>
+            </div>
+            <div class="form-group row">
                     <label class="col-2 col-form-label">Enter working code in C</label>
                     <div class="col-10">
                       <textarea id="codec" name="codec" rows="10" cols="120" required><?php if(isset($ccode)) {echo $ccode;} ?></textarea>
                     </div>
             </div>
+            <div class="form-group row">
+                    <label class="col-2 col-form-label">Enter the number of testcases</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" id="notest" name="notest" required value = <?php if(isset($notest)) {echo $notest;} ?>> 
+                    </div>
+            </div>
+            
 
             <!-- <div class="form-group row">
                     <label class="col-2 col-form-label">Enter working code in C++</label>
