@@ -1,17 +1,37 @@
 <?php 
 
-  include "config.php";
+  include "php_only/connection.php";
   session_start();
   $_SESSION['qname']=$_POST['questionname'];
-  print_r($_SESSION);
   $questionname=$_POST['questionname'];
   $question=$_POST['question'];
   $codec=$_POST['codec'];
   $notest=$_POST['notest'];
   $constraints = $_POST["constraints"];
+  if(isset($_SESSION['qid'])){
+    //question exists
+  $qid=$_SESSION["qid"];
+  $sql=$conn->prepare("update `questions` set `qname` = ?,`question` =? , `ccode` = ?,`constraints` = ? where `qid`= ?");
+  $sql->bind_param("sssss",$questionname,$question, $codec,$constraints,$qid);
+  $sql->execute();
+  $sql=$conn->prepare("delete from `testcases` where `qid`= ?");
+  $sql->bind_param("s",$qid);
+  $sql->execute();
+  }
+  else{
+  $sql=$conn->prepare("INSERT INTO `questions`(`qname`,`question`, `ccode`,`constraints`) VALUES (?,?,?,?)");
+  $sql->bind_param("ssss",$questionname,$question, $codec,$constraints);
+  $sql->execute();
+  $sql=$conn->prepare("select qid from `questions` where qname=?");
+  $sql->bind_param("s",$questionname);
+  $sql->execute();
+  $result=$sql->get_result();
+  $res= mysqli_fetch_assoc($result);
+  $_SESSION["qid"]= $res["qid"];
+  }
+  $_SESSION["notest"] = $notest;
 
-  $sql="INSERT INTO `questions`(`qname`,`question`, `ccode` , `notest`,`constraints`) VALUES ('".$questionname."','".$question."','".$codec."','".$notest."','".$constraints."')";
-  $conn -> query($sql);  
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -77,8 +97,8 @@
             }
           ?>
             <button type="submit" class="btn btn-primary" formaction="comp2.php" style="background-color: black" "color:white">Previous</button>
-            <button type="submit"  class="btn btn-primary" formaction="comp5conn.php" style="background-color: black" "color:white">Submit</button>
-            <button type="submit" class="btn btn-primary" formaction="comp5conn2.php" style="background-color: black" "color:white">Add Another Question</button>
+            <button type="submit"  class="btn btn-primary" formaction="php_only/comp5conn.php" style="background-color: black" "color:white">Submit</button>
+            <button type="submit" class="btn btn-primary" formaction="php_only/comp5conn2.php" style="background-color: black" "color:white">Add Another Question</button>
   				</form>	
   				<br>
   				

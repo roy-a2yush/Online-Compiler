@@ -1,7 +1,9 @@
 <?php
-include "config.php";
+include "php_only/connection.php";
+session_start();
 if(isset($_GET['id'])){
   $qid = $_GET['id'];
+  $_SESSION["qid"]= $qid;
   $stmt = $db->prepare("select * from `questions` where qid=?");
   $stmt->bind_param("s",$qid);
   $stmt->execute();
