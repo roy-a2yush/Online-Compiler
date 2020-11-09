@@ -1,3 +1,4 @@
+$(document).ready(function() {
 $(window).resize(function(){
   var heightofnav = document.getElementById('nav').offsetHeight;
   var h = window.innerHeight;
@@ -6,25 +7,41 @@ $(window).resize(function(){
   var res= 16-vhh;
   document.getElementById('bottom-tag').style.height= res+"vh";
 });
+
+
 $('#customIP').on('hidden.bs.modal',function(){
   $('#customipcheck').prop('checked',false);
 })
+
+
 $('#sel1').change(function(){
- var x = document.getElementById('sel1').value;
- if(x=="cpp"){
-   ext="cpp";
- }
- if(x=="java"){
-   ext="java";
-   //console.log("java");
-   editor.session.setMode("ace/mode/java");
- }
- if(x=="py"){
-   ext="py";
-   //console.log("python");
-   editor.session.setMode("ace/mode/python");
- }
+  var x = document.getElementById('sel1').value;
+  if(x=="c"){
+    ext="c";
+    editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setValue(c);
+  }
+  if(x=="cpp"){
+    ext="cpp";
+    editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setValue(cpp);
+  }
+  if(x=="java"){
+    ext="java";
+    console.log("java");
+    editor.session.setMode("ace/mode/java");
+    editor.session.setValue(java);
+  }
+  if(x=="py"){
+    ext="py";
+    //console.log("python");
+    editor.session.setMode("ace/mode/python");
+    editor.session.setValue(py);
+  }
+  console.log("Changed xD");
 })
+
+
 function ajax_run(code,ip,ext) {
       var hr = new XMLHttpRequest();
       var url = "php_only/runcode.php";
@@ -40,6 +57,8 @@ function ajax_run(code,ip,ext) {
       hr.send(vars); // Actually execute the request
       $("#outputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
     }
+
+
 $('#RunWithIP').click(function(){
   var prog = editor.getSession().getValue();
   var ip = document.getElementById('ip').value;
@@ -51,6 +70,8 @@ $('#RunWithIP').click(function(){
     $('#inputText').text(ip);
   })
  })
+
+
  $('#runWithoutIP').click(function(){
    var prog = editor.getSession().getValue();
    var ip = document.getElementById('sIN').textContent;
@@ -62,3 +83,19 @@ $('#RunWithIP').click(function(){
      $('#inputText').text(ip);
    })
   })
+
+  editor.session.on('change', function(delta) {
+    if(ext=="c"){
+      c=editor.getSession().getValue();
+    }
+    if(ext=="Java"){
+      java=editor.getSession().getValue();
+    }
+    if(ext=="cpp"){
+      cpp = editor.getSession().getValue();
+    }
+    if(ext=="py"){
+      py = editor.getSession().getValue();
+    }
+ });
+});

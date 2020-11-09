@@ -1,9 +1,9 @@
 <?php
 
   //starting session
-//  session_start();
-//  $pid = $_GET['pid'];
-//  include "php_only/codex_Question.php";
+  session_start();
+  $pid = $_GET['pid'];
+include "php_only/codex_Question.php";
 
  ?>
 <!DOCTYPE html>
@@ -35,13 +35,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"> Input: </h5>
-            <p class="card-text"> </p>
+            <p class="card-text" id="inputText"> 1 2 </p>
           </div>
         </div>
         <div class="card" style="margin-top:10px;">
           <div class="card-body">
             <h5 class="card-title"> Output: </h5>
-            <p class="card-text"> 123456 </p>
+            <p class="card-text" id="outputText"> 3 </p>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text">Enter Your Testcase</span>
   </div>
-  <textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
+  <textarea class="form-control" aria-label="With textarea" rows="10" id="ip"></textarea>
 </div>
     </div>
     <div class="modal-footer">
@@ -89,7 +89,7 @@
       <div class="card" style="margin-top:10px;">
         <div class="card-body">
           <h5 class="card-title"> Submit Status: </h5>
-          <p class="bg-success rounded p-3 text-white"> Success </p>
+          <p class="bg-success rounded p-3 text-white">Success</p>
         </div>
       </div>
     </div>
@@ -133,8 +133,8 @@
            <?php
 
             //printing problem name
-          //  $pName = $_SESSION['pName'];
-          //  echo "$pName";
+            $pName = $_SESSION['pName'];
+            echo "$pName";
 
            ?>
          </p>
@@ -147,8 +147,8 @@
            <?php
 
             //printing problem Description
-          //  $pDesc = $_SESSION['pDesc'];
-          //  echo "$pDesc";
+            $pDesc = $_SESSION['pDesc'];
+            echo "$pDesc";
 
            ?>
          </p>
@@ -161,8 +161,8 @@
            <?php
 
             //printing problem Constraints
-        //    $constraints = $_SESSION['constraints'];
-        //    echo "$constraints";
+           $constraints = $_SESSION['constraints'];
+           echo "$constraints";
 
            ?>
          </p>
@@ -171,12 +171,12 @@
      <div class="card shadow" style="margin-top:10px;">
        <div class="card-body">
          <h5 class="card-title"> Sample Input </h5>
-         <p class="card-text">
+         <p class="card-text" id="sIN">
            <?php
 
             //printing sample Input
-        //    $sampleInput = $_SESSION['sampleInput'];
-        //    echo "$sampleInput";
+            $sampleInput = $_SESSION['sampleInput'];
+            echo "$sampleInput";
 
            ?>
          </p>
@@ -189,8 +189,8 @@
            <?php
 
             //printing sample Output
-        //    $sampleOutput = $_SESSION['sampleOutput'];
-        //    echo "$sampleOutput";
+            $sampleOutput = $_SESSION['sampleOutput'];
+            echo "$sampleOutput";
 
            ?>
          </p>
@@ -207,6 +207,11 @@
     editor.setShowPrintMargin(false);
     editor.setFontSize("12px");
     var ext="c";
+    var c="#include<stdio.h>\nvoid main(){\n\t\n}";
+    var java = "class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}";
+    var cpp = "#include<iostream>\nusing namespace std;\nint main(){\n\t\n\treturn 0;\n}";
+    var py = "#code in python";
+    editor.session.setValue(c);
 </script>
    </div>
 </div>
@@ -221,7 +226,7 @@
   </select>
   <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP" id="Check" > <small><span class="text-white">Custom Run</span></small>
 <div class="float-right">
-    <button align="right" class="btn btn-m btn-primary" onclick="toogleRun();" data-toggle="modal" data-target="#runButton">Run</button>
+    <button align="right" id="runWithoutIP" class="btn btn-m btn-primary" onclick="toogleRun();" data-toggle="modal" data-target="#runButton">Run</button>
     <button align="right" class="btn btn-m btn-warning" data-toggle="modal" data-target="#submitStatus">Submit</button>
   </div>
 </div>
@@ -233,63 +238,107 @@
   var heightofnav = document.getElementById('nav').offsetHeight;
   var h = window.innerHeight;
   var vhh = (heightofnav/h)*100;
-  //console.log('nav ka vhh is '+vhh);
   var res= 16-vhh;
   document.getElementById('bottom-tag').style.height= res+"vh";
-  $(window).resize(function(){
-    var heightofnav = document.getElementById('nav').offsetHeight;
-    var h = window.innerHeight;
-    var vhh = (heightofnav/h)*100;
-    console.log('nav ka vhh is '+vhh);
-    var res= 16-vhh;
-    document.getElementById('bottom-tag').style.height= res+"vh";
-});
-  $('#customIP').on('hidden.bs.modal',function(){
-    $('#customipcheck').prop('checked',false);
-  })
-  $('#sel1').change(function(){
-   var x = document.getElementById('sel1').value;
-   if(x=="cpp"){
-     ext="cpp";
-   }
-   if(x=="java"){
-     ext="java";
-     //console.log("java");
-     editor.session.setMode("ace/mode/java");
-   }
-   if(x=="py"){
-     ext="py";
-     //console.log("python");
-     editor.session.setMode("ace/mode/python");
-   }
-  })
-  function ajax_run(code,ip,ext) {
-        var hr = new XMLHttpRequest();
-        var url = "php_only/runcode.php";
-        var vars = "code=" + encodeURIComponent(code) + "&textIP=" + ip+ "&ext=" + ext;
-        hr.open("POST", url, true);
-        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        hr.onreadystatechange = function() {
-          if (hr.readyState == 4 && hr.status == 200) {
-            var return_data = hr.responseText;
-            $("#outputText").html(return_data);
-          }
-        }
-        hr.send(vars); // Actually execute the request
-        $("#outputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
-      }
-  $('#RunWithIP').click(function(){
-    var prog = editor.getSession().getValue();
-    var ip = document.getElementById('ip').value;
-    if(ip.trim()==""){
-      ip="No input";
-    }
-    ajax_run(prog,ip,ext);
-    $('#runButton').on('shown.bs.modal',function(){
-      $('#inputText').text(ip);
-    })
-   })
 
+
+
+  $(window).resize(function(){
+  var heightofnav = document.getElementById('nav').offsetHeight;
+  var h = window.innerHeight;
+  var vhh = (heightofnav/h)*100;
+  var res= 16-vhh;
+  document.getElementById('bottom-tag').style.height= res+"vh";
+});
+
+
+$('#customIP').on('hidden.bs.modal',function(){
+  $('#customipcheck').prop('checked',false);
+})
+
+
+$('#sel1').change(function(){
+  var x = document.getElementById('sel1').value;
+  if(x=="c"){
+    ext="c";
+    editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setValue(c);
+  }
+  if(x=="cpp"){
+    ext="cpp";
+    editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setValue(cpp);
+  }
+  if(x=="java"){
+    ext="java";
+    editor.session.setMode("ace/mode/java");
+    editor.session.setValue(java);
+  }
+  if(x=="py"){
+    ext="py";
+    editor.session.setMode("ace/mode/python");
+    editor.session.setValue(py);
+  }
+})
+
+
+function ajax_run(code,ip,ext) {
+      var hr = new XMLHttpRequest();
+      var url = "php_only/runcode.php";
+      var vars = "code=" + encodeURIComponent(code) + "&textIP=" + ip+ "&ext=" + ext;
+      hr.open("POST", url, true);
+      hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      hr.onreadystatechange = function() {
+        if (hr.readyState == 4 && hr.status == 200) {
+          var return_data = hr.responseText;
+          $("#outputText").html(return_data);
+        }
+      }
+      hr.send(vars); // Actually execute the request
+      $("#outputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
+    }
+
+
+$('#RunWithIP').click(function(){
+  var prog = editor.getSession().getValue();
+  var ip = document.getElementById('ip').value;
+  console.log(prog,ip,ext);
+  if(ip.trim()==""){
+    ip="No input";
+  }
+  ajax_run(prog,ip,ext);
+  $('#runButton').on('shown.bs.modal',function(){
+    $('#inputText').text(ip);
+  })
+ })
+
+
+ $('#runWithoutIP').click(function(){
+   var prog = editor.getSession().getValue();
+   var ip = document.getElementById('sIN').textContent.trim();
+   if(ip.trim()==""){
+     ip="No input";
+   }
+   ajax_run(prog,ip,ext);
+   $('#runButton').on('shown.bs.modal',function(){
+     $('#inputText').text(ip);
+   })
+  })
+
+  editor.session.on('change', function(delta) {
+    if(ext=="c"){
+      c=editor.getSession().getValue();
+    }
+    if(ext=="Java"){
+      java=editor.getSession().getValue();
+    }
+    if(ext=="cpp"){
+      cpp = editor.getSession().getValue();
+    }
+    if(ext=="py"){
+      py = editor.getSession().getValue();
+    }
+ });
 </script>
 </body>
 </html>

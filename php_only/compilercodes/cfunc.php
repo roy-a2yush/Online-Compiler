@@ -64,12 +64,11 @@ class codeWithC{
     		}
     		//echo "<pre>$output</pre>";
         if($showOutput)
-    		echo nl2br("$output");
+    		echo nl2br("<p class='bg-success rounded p-3 text-white'>$output</p>");
             //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
     	}
     	else if(!strpos($this->error,"error"))
     	{
-    		echo "<pre>$this->error</pre>";
     		if(trim($this->input)=="")
     		{
     			$output=shell_exec($this->out);
@@ -81,14 +80,16 @@ class codeWithC{
     		}
     		//echo "<pre>$output</pre>";
         if($showOutput)
-    		echo nl2br("$output");
+    		echo nl2br("<p class='bg-success rounded p-3 text-white'>$output</p>");
                   //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
     	}
-    	else if($showOutput)
-    	{
-    		echo nl2br("<pre>$this->error</pre>");
+      else{
+        if($showOutput)
+        {
+          echo nl2br("<pre class='bg-danger rounded p-3 text-white'>$this->error </pre>");
+        }
         $output="error";
-    	}
+      }
       return $output;
   }
   function clearFiles(){

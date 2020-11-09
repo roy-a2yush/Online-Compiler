@@ -7,9 +7,13 @@ $(window).resize(function(){
   var res= 16-vhh;
   document.getElementById('bottom-tag').style.height= res+"vh";
 });
+
+
 $('#customIP').on('hidden.bs.modal',function(){
   $('#customipcheck').prop('checked',false);
 })
+
+
 $('#sel1').change(function(){
  var x = document.getElementById('sel1').value;
  if(x=="c"){
@@ -35,6 +39,9 @@ $('#sel1').change(function(){
    editor.session.setValue(py);
  }
 })
+
+
+
 function ajax_run(code,ip,ext) {
     var hr = new XMLHttpRequest();
     var url = "php_only/runcode.php";
@@ -50,6 +57,9 @@ function ajax_run(code,ip,ext) {
     hr.send(vars); // Actually execute the request
     $("#outputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
   }
+
+
+
 $('#RunWithIP').click(function(){
 var prog = editor.getSession().getValue();
 var ip = document.getElementById('ip').value;
@@ -61,6 +71,9 @@ $('#runButton').on('shown.bs.modal',function(){
   $('#inputText').text(ip);
 })
 })
+
+
+
 editor.session.on('change', function(delta) {
    if(ext=="c"){
      c=editor.getSession().getValue();
