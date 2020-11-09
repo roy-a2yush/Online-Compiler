@@ -1,4 +1,3 @@
-
 <?php 
 
   include "config.php";
@@ -8,10 +7,10 @@
   $questionname=$_POST['questionname'];
   $question=$_POST['question'];
   $codec=$_POST['codec'];
-  /*$codecpp=$_POST['codecpp'];
-  $codej=$_POST['codej'];
-  $codep=$_POST['codep'];
-  */$sql="INSERT INTO `questions`(`qname`,`question`, `ccode`) VALUES ('".$questionname."','".$question."','".$codec."')";
+  $notest=$_POST['notest'];
+  $constraints = $_POST["constraints"];
+
+  $sql="INSERT INTO `questions`(`qname`,`question`, `ccode` , `notest`,`constraints`) VALUES ('".$questionname."','".$question."','".$codec."','".$notest."','".$constraints."')";
   $conn -> query($sql);  
 ?>
 <!DOCTYPE html>
@@ -64,16 +63,22 @@
   				
 
           <form style="font-size: 15px" method="POST" >
-          <div class="form-group row">
-                    <label class="col-2 col-form-label">Enter test case 1 (1/3)</label>
+          <?php 
+            for($i=0;$i<$notest;$i++)
+            {
+           ?>   
+            <div class="form-group row">
+                    <label class="col-2 col-form-label">Enter test case <?php echo $i+1; ?></label>
                     <div class="col-10">
-                      <textarea id="testcase1" name="testcase1" rows="10" cols="120" required></textarea>
+                      <textarea id="testcase1" name=<?php echo "testcase".$i; ?> rows="10" cols="120" required></textarea>
                     </div>
             </div>
+          <?php 
+            }
+          ?>
             <button type="submit" class="btn btn-primary" formaction="comp2.php" style="background-color: black" "color:white">Previous</button>
-
-            <button type="submit" class="btn btn-primary" formaction="comp4.php" style="background-color: black" "color:white">Next</button>
-
+            <button type="submit"  class="btn btn-primary" formaction="comp5conn.php" style="background-color: black" "color:white">Submit</button>
+            <button type="submit" class="btn btn-primary" formaction="comp5conn2.php" style="background-color: black" "color:white">Add Another Question</button>
   				</form>	
   				<br>
   				
