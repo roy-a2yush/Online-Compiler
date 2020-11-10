@@ -240,15 +240,13 @@ include "php_only/codex_Question.php";
   </select>
   <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP" id="Check" > <small><span class="text-white">Custom Run</span></small>
 <div class="float-right">
-    <button align="right" id="submit" class="btn btn-m btn-info" onclick="ajax_store();">Save</button>
     <button align="right" id="runWithoutIP" class="btn btn-m btn-primary" onclick="toogleRun();" data-toggle="modal" data-target="#runButton">Run</button>
     <button align="right" id="submitCode" class="btn btn-m btn-warning" data-toggle="modal" data-target="#submitStatus">Submit</button>
   </div>
 </div>
 <script type="text/javascript">
-var isChanged = true;
+var isChanged = false;
 function ajax_store(){
-  isChanged = false;
       var hr = new XMLHttpRequest();
       var url = "php_only/storecodex.php";
       var vars = "c=" + encodeURIComponent(c) + "&cpp=" + encodeURIComponent(cpp) + "&java=" + encodeURIComponent(java) + "&py=" + encodeURIComponent(py) + "&uid=" + uid  + "&qid="+qid;
@@ -262,10 +260,6 @@ function ajax_store(){
       hr.send(vars);
     }
 
-window.onbeforeunload = function(){
-  if(isChanged)
-  return !isChanged;
-}
 
   function toogleRun(){
     var x = editor.getValue();
@@ -385,7 +379,6 @@ $('#RunWithIP').click(function(){
   })
 
   editor.session.on('change', function(delta) {
-    isChanged = true;
     if(ext=="c"){
       c=editor.getSession().getValue();
     }
@@ -398,6 +391,7 @@ $('#RunWithIP').click(function(){
     if(ext=="py"){
       py = editor.getSession().getValue();
     }
+    ajax_store();
  });
 </script>
 </body>
