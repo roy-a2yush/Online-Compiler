@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2020 at 10:03 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 10, 2020 at 06:10 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,29 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `problems`
---
-
-CREATE TABLE `problems` (
-  `pid` int(11) NOT NULL,
-  `pName` varchar(100) NOT NULL,
-  `pDesc` varchar(100) NOT NULL,
-  `constraints` varchar(100) NOT NULL,
-  `sampleInput` varchar(100) NOT NULL,
-  `sampleOutput` varchar(100) NOT NULL,
-  `numTestCases` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `problems`
---
-
-INSERT INTO `problems` (`pid`, `pName`, `pDesc`, `constraints`, `sampleInput`, `sampleOutput`, `numTestCases`) VALUES
-(1, 'Addition', 'Input 2 numbers and print their sum', 'Both the inputted numbers must be within the range of Int ', '1 2', '3', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `questions`
 --
 
@@ -55,10 +33,6 @@ CREATE TABLE `questions` (
   `qname` varchar(500) NOT NULL,
   `question` varchar(1000) NOT NULL,
   `ccode` varchar(1000) NOT NULL,
-  `testcase1` varchar(50) NOT NULL,
-  `testcase2` varchar(50) NOT NULL,
-  `testcase3` varchar(50) NOT NULL,
-  `notest` int(50) DEFAULT NULL,
   `constraints` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -66,8 +40,30 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`qid`, `qname`, `question`, `ccode`, `testcase1`, `testcase2`, `testcase3`, `notest`, `constraints`) VALUES
-(42, 'A', 'aa', 's', '', '', '', 1, 's');
+INSERT INTO `questions` (`qid`, `qname`, `question`, `ccode`, `constraints`) VALUES
+(42, 'A', 'aa', 's', 's'),
+(43, 'testq', 'this', '#include<stdio.h>\r\nvoid main(){\r\nint a,b;\r\nscanf(\"%d%d\", &a,&b);\r\nprintf(\"%d\", a+b);\r\n}', 'None');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testcases`
+--
+
+CREATE TABLE `testcases` (
+  `qid` int(11) DEFAULT NULL,
+  `testcase` varchar(5000) DEFAULT NULL,
+  `testcaseop` varchar(5000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `testcases`
+--
+
+INSERT INTO `testcases` (`qid`, `testcase`, `testcaseop`) VALUES
+(43, '2 3', '5'),
+(43, '4 5', '9'),
+(43, '5 6', '11');
 
 -- --------------------------------------------------------
 
@@ -92,15 +88,31 @@ INSERT INTO `user` (`uid`, `name`, `email`, `phoneNo`, `organisation`, `password
 (1, 'Aayush', 'roy.a2yush@cmrit.ac.in', '9931837670', 'CMRIT', '7da70a24ff2c3ff3cbdae659248647d8'),
 (2, 'Aayush', 'roy.a2yush@zephyr.com', '9931837670', 'Zephyr', '7da70a24ff2c3ff3cbdae659248647d8');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usercodes`
+--
+
+CREATE TABLE `usercodes` (
+  `uid` int(11) NOT NULL,
+  `qid` int(11) NOT NULL,
+  `ccode` longtext NOT NULL,
+  `javacode` longtext NOT NULL,
+  `cppcode` longtext NOT NULL,
+  `pycode` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `usercodes`
+--
+
+INSERT INTO `usercodes` (`uid`, `qid`, `ccode`, `javacode`, `cppcode`, `pycode`) VALUES
+(1, 43, '#include<stdio.h>\nvoid main(){\n	\n}', 'class Main{\n	public static void main(String[] args){\n		\n	}\n}', '#include<iostream>\nusing namespace std;\nint main(){\n	\n	return 0;\n}', '#code in python');
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `problems`
---
-ALTER TABLE `problems`
-  ADD PRIMARY KEY (`pid`);
 
 --
 -- Indexes for table `questions`
@@ -109,32 +121,56 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`qid`);
 
 --
+-- Indexes for table `testcases`
+--
+ALTER TABLE `testcases`
+  ADD KEY `qid` (`qid`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `usercodes`
 --
+ALTER TABLE `usercodes`
+  ADD KEY `fk_touser` (`uid`),
+  ADD KEY `fk_toquestions` (`qid`);
 
 --
--- AUTO_INCREMENT for table `problems`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `problems`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `qid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `qid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `testcases`
+--
+ALTER TABLE `testcases`
+  ADD CONSTRAINT `testcases_ibfk_1` FOREIGN KEY (`qid`) REFERENCES `questions` (`qid`);
+
+--
+-- Constraints for table `usercodes`
+--
+ALTER TABLE `usercodes`
+  ADD CONSTRAINT `fk_toquestions` FOREIGN KEY (`qid`) REFERENCES `questions` (`qid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_touser` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
