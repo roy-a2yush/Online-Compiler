@@ -226,11 +226,33 @@ include "php_only/codex_Question.php";
   </select>
   <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP" id="Check" > <small><span class="text-white">Custom Run</span></small>
 <div class="float-right">
+    <button align="right" id="submit" class="btn btn-m btn-info" onclick="ajax_store();">Save</button>
     <button align="right" id="runWithoutIP" class="btn btn-m btn-primary" onclick="toogleRun();" data-toggle="modal" data-target="#runButton">Run</button>
     <button align="right" id="submitCode" class="btn btn-m btn-warning" data-toggle="modal" data-target="#submitStatus">Submit</button>
   </div>
 </div>
 <script type="text/javascript">
+var isChanged = true;
+function ajax_store(){
+  isChanged = false;
+      var hr = new XMLHttpRequest();
+      var url = "php_only/storecodex.php";
+      var vars = "c=" + encodeURIComponent(c) + "&cpp=" + encodeURIComponent(cpp) + "&java=" + encodeURIComponent(java) + "&py=" + encodeURIComponent(py) + "&uid=" + uid  + "&qid="+qid;
+      hr.open("POST", url, true);
+      hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      hr.onreadystatechange = function() {
+        if (hr.readyState == 4 && hr.status == 200) {
+          var return_data = hr.responseText;
+        }
+      }
+      hr.send(vars);
+    }
+
+window.onbeforeunload = function(){
+  if(isChanged)
+  return !isChanged;
+}
+
   function toogleRun(){
     var x = editor.getValue();
     console.log(x);
@@ -244,6 +266,9 @@ include "php_only/codex_Question.php";
   var qid = <?php echo $_SESSION["qid"]; ?>
 
 
+
+  var uid=1;
+
   $(window).resize(function(){
   var heightofnav = document.getElementById('nav').offsetHeight;
   var h = window.innerHeight;
@@ -252,10 +277,6 @@ include "php_only/codex_Question.php";
   document.getElementById('bottom-tag').style.height= res+"vh";
 });
 
-$(window).unload(function(){
-  alert("Are You sure?");
-  //ajax_store(c,cpp,java,py);
-})
 $('#customIP').on('hidden.bs.modal',function(){
   $('#customipcheck').prop('checked',false);
 })
@@ -350,6 +371,7 @@ $('#RunWithIP').click(function(){
   })
 
   editor.session.on('change', function(delta) {
+    isChanged = true;
     if(ext=="c"){
       c=editor.getSession().getValue();
     }
