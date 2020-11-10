@@ -2,7 +2,7 @@
 
   //starting session
   session_start();
-  $pid = $_GET['pid'];
+  $qid = $_GET['qid'];
 include "php_only/codex_Question.php";
 
  ?>
@@ -35,13 +35,13 @@ include "php_only/codex_Question.php";
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"> Input: </h5>
-            <p class="card-text" id="inputText"> 1 2 </p>
+            <p class="card-text" id="inputText"></p>
           </div>
         </div>
         <div class="card" style="margin-top:10px;">
           <div class="card-body">
             <h5 class="card-title"> Output: </h5>
-            <p class="card-text" id="outputText"> 3 </p>
+            <p class="card-text" id="outputText"></p>
           </div>
         </div>
       </div>

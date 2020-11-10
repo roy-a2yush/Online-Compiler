@@ -1,6 +1,6 @@
 <?php
 class codeWithC{
-  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$executable,$command,$command_error,$error,$isWindows;
+  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$executable,$command,$command_error,$error,$isWindows,$output;
     function __construct($co){
         $os = php_uname();
         $this->isWindows=false;
@@ -34,6 +34,7 @@ class codeWithC{
         $file_code=fopen($this->filename_code,"w+");
         fwrite($file_code,$this->code);
         fclose($file_code);
+        $this->output;
   }
   	//if(trim($code)=="")
   	//die("The code area is empty");
@@ -55,32 +56,32 @@ class codeWithC{
     	{
     		if(trim($this->input)=="")
     		{
-    			$output=shell_exec($this->out);
+    			$this->output=shell_exec($this->out);
     		}
     		else
     		{
     			$this->out=$this->out." < ".$this->filename_in;
-    			$output=shell_exec($this->out);
+    			$this->output=shell_exec($this->out);
     		}
     		//echo "<pre>$output</pre>";
         if($showOutput)
-    		echo nl2br("<p class='bg-success rounded p-3 text-white'>$output</p>");
+    		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
             //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
     	}
     	else if(!strpos($this->error,"error"))
     	{
     		if(trim($this->input)=="")
     		{
-    			$output=shell_exec($this->out);
+    			$this->output=shell_exec($this->out);
     		}
     		else
     		{
     			$this->out=$this->out." < ".$this->filename_in;
-    			$output=shell_exec($this->out);
+    			$this->output=shell_exec($this->out);
     		}
     		//echo "<pre>$output</pre>";
         if($showOutput)
-    		echo nl2br("<p class='bg-success rounded p-3 text-white'>$output</p>");
+    		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
                   //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
     	}
       else{
@@ -88,9 +89,10 @@ class codeWithC{
         {
           echo nl2br("<pre class='bg-danger rounded p-3 text-white'>$this->error </pre>");
         }
-        $output="error";
+        return nl2br($this->error);
+        //$output="error";
       }
-      return $output;
+      return $this->output;
   }
   function clearFiles(){
     if($this->isWindows){

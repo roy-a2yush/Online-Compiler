@@ -6,6 +6,7 @@
   $questionname=$_POST['questionname'];
   $question=$_POST['question'];
   $codec=$_POST['codec'];
+  $_SESSION["ccode"] = $codec;
   $notest=$_POST['notest'];
   $constraints = $_POST["constraints"];
   if(isset($_SESSION['qid'])){
