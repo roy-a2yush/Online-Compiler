@@ -1,6 +1,6 @@
 <?php
 class codeWithJava{
-  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$runtime_file,$executable,$command,$command_error,$runtime_error_command,$error,$isWindows;
+  public $unid,$CC,$out,$code,$input,$filename_code,$filename_in,$filename_error,$runtime_file,$executable,$command,$command_error,$runtime_error_command,$error,$isWindows,$output;
   function __construct($co){
     $os = php_uname();
     $this->isWindows=false;
@@ -49,18 +49,18 @@ class codeWithJava{
   		{
   			shell_exec($this->runtime_error_command);
   			$runtime_error=file_get_contents($this->runtime_file);
-  			$output=shell_exec($this->out);
+  			$this->output=shell_exec($this->out);
   		}
   		else
   		{
   			shell_exec($this->runtime_error_command);
   			$this->runtime_error=file_get_contents($this->runtime_file);
   			$this->out=$this->out." < ".$this->filename_in;
-  			$output=shell_exec($this->out);
+  			$this->output=shell_exec($this->out);
   		}
   		if($showOutput)
   		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
-  		  //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
+  		  //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$this->output</textarea><br><br>";
   	}
   	else if(!strpos($this->error,"error"))
   	{
@@ -68,22 +68,25 @@ class codeWithJava{
   		echo "<pre>$this->error</pre>";
   		if(trim($this->input)=="")
   		{
-  			$output=shell_exec($this->out);
+  			$this->output=shell_exec($this->out);
   		}
   		else
   		{
   			$this->out=$this->out." < ".$this->filename_in;
-  			$output=shell_exec($this->out);
+  			$this->output=shell_exec($this->out);
   		}
   		if($showOutput)
   		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
   	}
-  	else if($showOutput)
-  	{
-  		echo nl2br("<pre>$this->error</pre>");
-      $output=$this->error;
-  	}
-    return $output;
+  	else{
+        if($showOutput)
+        {
+          echo nl2br("<pre class='bg-danger rounded p-3 text-white'>$this->error </pre>");
+        }
+        return nl2br($this->error);
+        //$output="error";
+      }
+      return nl2br($this->output);
   }
   function clearFiles(){
     if($this->isWindows){

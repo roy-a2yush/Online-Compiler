@@ -207,10 +207,24 @@ include "php_only/codex_Question.php";
     editor.setShowPrintMargin(false);
     editor.setFontSize("12px");
     var ext="c";
-    var c="#include<stdio.h>\nvoid main(){\n\t\n}";
-    var java = "class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}";
-    var cpp = "#include<iostream>\nusing namespace std;\nint main(){\n\t\n\treturn 0;\n}";
-    var py = "#code in python";
+
+    var ccode =`<?php if(isset($c)) echo $c; ?>`;
+    var javacode = `<?php if(isset($java)) echo $java; ?>`;
+    var cppcode = `<?php if(isset($cpp)) echo $cpp; ?>`;
+    var pycode = `<?php if(isset($py)) echo $py; ?>`;
+
+
+
+
+    var c= ccode.trim() === "" ? "#include<stdio.h>\nvoid main(){\n\t\n}" : ccode;
+    var java = javacode.trim() === "" ? "class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}"  : javacode;
+    var cpp = cppcode.trim() === "" ? "#include<iostream>\nusing namespace std;\nint main(){\n\t\n\treturn 0;\n}" : cppcode;
+    var py = pycode.trim() === "" ? "#code in python" : pycode;
+
+
+
+
+
     editor.session.setValue(c);
 </script>
    </div>
@@ -375,7 +389,7 @@ $('#RunWithIP').click(function(){
     if(ext=="c"){
       c=editor.getSession().getValue();
     }
-    if(ext=="Java"){
+    if(ext=="java"){
       java=editor.getSession().getValue();
     }
     if(ext=="cpp"){

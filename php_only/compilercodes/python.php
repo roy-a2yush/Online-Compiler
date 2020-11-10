@@ -1,6 +1,6 @@
 <?php
 class codeWithPython{
-  public $unid,$CC,$code,$input,$filename_code,$filename_in,$filename_error,$command,$command_error,$error,$isWindows;
+  public $unid,$CC,$code,$input,$filename_code,$filename_in,$filename_error,$command,$command_error,$error,$isWindows,$output;
   function __construct($co){
     $os = php_uname();
     $this->isWindows=false;
@@ -42,22 +42,24 @@ class codeWithPython{
   	{
   		if(trim($this->input)=="")
   		{
-  			$output=shell_exec($this->command);
+  			$this->output=shell_exec($this->command);
   		}
   		else
   		{
   			$this->command=$this->command." < ".$this->filename_in;
-  			$output=shell_exec($this->command);
+  			$this->output=shell_exec($this->command);
   		}
       if($showOutput)
-  		echo nl2br("$output");
+  		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
   	}
-  	else
-  	{
-  		echo nl2br("<pre>$this->error</pre>");
-      $output = "error";
-  	}
-    return $output;
+  	else{
+        if($showOutput)
+        {
+          echo nl2br("<pre class='bg-danger rounded p-3 text-white'>$this->error </pre>");
+        }
+        return nl2br($this->error);
+      }
+      return nl2br($this->output);
  }
  function clearFiles(){
   if($this->isWindows){
