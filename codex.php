@@ -88,8 +88,8 @@ include "php_only/codex_Question.php";
     <div class="modal-body">
       <div class="card" style="margin-top:10px;">
         <div class="card-body">
-          <h5 class="card-title"> Submit Status: </h5>
-          <p class="bg-success rounded p-3 text-white">Success</p>
+          <h5 class="card-title"> Let's see how you have done ;) </h5>
+          <p class="card-text" id="subOutputText"></p>
         </div>
       </div>
     </div>
@@ -227,7 +227,7 @@ include "php_only/codex_Question.php";
   <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP" id="Check" > <small><span class="text-white">Custom Run</span></small>
 <div class="float-right">
     <button align="right" id="runWithoutIP" class="btn btn-m btn-primary" onclick="toogleRun();" data-toggle="modal" data-target="#runButton">Run</button>
-    <button align="right" class="btn btn-m btn-warning" data-toggle="modal" data-target="#submitStatus">Submit</button>
+    <button align="right" id="submitCode" class="btn btn-m btn-warning" data-toggle="modal" data-target="#submitStatus">Submit</button>
   </div>
 </div>
 <script type="text/javascript">
@@ -241,6 +241,7 @@ include "php_only/codex_Question.php";
   var res= 16-vhh;
   document.getElementById('bottom-tag').style.height= res+"vh";
 
+  var qid = <?php echo $_SESSION["qid"]; ?>
 
 
   $(window).resize(function(){
@@ -251,7 +252,10 @@ include "php_only/codex_Question.php";
   document.getElementById('bottom-tag').style.height= res+"vh";
 });
 
-
+$(window).unload(function(){
+  alert("Are You sure?");
+  //ajax_store(c,cpp,java,py);
+})
 $('#customIP').on('hidden.bs.modal',function(){
   $('#customipcheck').prop('checked',false);
 })
@@ -284,8 +288,8 @@ $('#sel1').change(function(){
 
 function ajax_run(code,ip,ext) {
       var hr = new XMLHttpRequest();
-      var url = "php_only/runcode.php";
-      var vars = "code=" + encodeURIComponent(code) + "&textIP=" + ip+ "&ext=" + ext;
+      var url = "php_only/runcodex.php";
+      var vars = "code=" + encodeURIComponent(code) + "&textIP=" + ip+ "&ext=" + ext + "&qid="+qid;
       hr.open("POST", url, true);
       hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       hr.onreadystatechange = function() {
@@ -298,6 +302,21 @@ function ajax_run(code,ip,ext) {
       $("#outputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
     }
 
+    function ajax_sub(code,ext) {
+      var hr = new XMLHttpRequest();
+      var url = "php_only/subcodex.php";
+      var vars = "code=" + encodeURIComponent(code) + "&ext=" + ext + "&qid="+qid;
+      hr.open("POST", url, true);
+      hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      hr.onreadystatechange = function() {
+        if (hr.readyState == 4 && hr.status == 200) {
+          var return_data = hr.responseText;
+          $("#subOutputText").html(return_data);
+        }
+      }
+      hr.send(vars); // Actually execute the request
+      $("#subOutputText").html("<div class='spinner-grow text-dark' role='status'><span class='sr-only'>Loading...</span></div>");
+    }
 
 $('#RunWithIP').click(function(){
   var prog = editor.getSession().getValue();
@@ -316,13 +335,18 @@ $('#RunWithIP').click(function(){
  $('#runWithoutIP').click(function(){
    var prog = editor.getSession().getValue();
    var ip = document.getElementById('sIN').textContent.trim();
+   ajax_run(prog,ip,ext);
    if(ip.trim()==""){
      ip="No input";
    }
-   ajax_run(prog,ip,ext);
    $('#runButton').on('shown.bs.modal',function(){
      $('#inputText').text(ip);
    })
+  })
+
+  $('#submitCode').click(function(){
+    var prog = editor.getSession().getValue();
+    ajax_sub(prog,ext);
   })
 
   editor.session.on('change', function(delta) {

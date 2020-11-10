@@ -92,7 +92,7 @@ class codeWithC{
         return nl2br($this->error);
         //$output="error";
       }
-      return $this->output;
+      return nl2br($this->output);
   }
   function clearFiles(){
     if($this->isWindows){

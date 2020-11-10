@@ -59,7 +59,7 @@ class codeWithJava{
   			$output=shell_exec($this->out);
   		}
   		if($showOutput)
-  		echo nl2br("$output");
+  		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
   		  //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
   	}
   	else if(!strpos($this->error,"error"))
@@ -76,31 +76,27 @@ class codeWithJava{
   			$output=shell_exec($this->out);
   		}
   		if($showOutput)
-  		echo nl2br("$output");
+  		echo nl2br("<p class='bg-success rounded p-3 text-white'>$this->output</p>");
   	}
   	else if($showOutput)
   	{
   		echo nl2br("<pre>$this->error</pre>");
-      $output="error";
+      $output=$this->error;
   	}
     return $output;
   }
   function clearFiles(){
     if($this->isWindows){
-    	exec("del $this->filename_code");
-    	exec("del $this->runtime_file");
-      exec("del $this->filename_in");
-      exec("del $this->filename_error");
-    	exec("del $this->executable");
+	  exec("del *.txt");
+	  exec("del *.java");
+	  exec("del *.class");
       chdir("..");
       rmdir($this->unid);
     }
     else {
-      exec("rm $this->filename_code");
-    	exec("rm $this->runtime_file");
-      exec("rm $this->filename_in");
-      exec("rm $this->filename_error");
-    	exec("rm $this->executable");
+      exec("rm *.txt");
+      exec("rm *.java");
+      exec("rm *.class");
       chdir("..");
       rmdir($this->unid);
     }
