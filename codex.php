@@ -3,7 +3,7 @@
   //starting session
   session_start();
   $qid = $_GET['qid'];
-include "php_only/codex_Question.php";
+  include "php_only/codex_Question.php";
 
  ?>
 <!DOCTYPE html>
