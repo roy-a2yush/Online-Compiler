@@ -1,3 +1,8 @@
+<?php
+  include 'php_only/connection.php';
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -45,12 +50,23 @@
 
   <!-- main heading -->
   <h1 class="main-heading dashboard-header">Daily Challenges</h1>
+  <?php
 
+    $sql_stmt = "Select * from questions";
+    $result = mysqli_query($db, $sql_stmt);
+    while ($question = $result->fetch_assoc()) {
+        $qid = $question['qid'];
+        $qname = $question['qname'];
+        $q = $question['question'];
+
+  ?>
   <!-- Jumbotron for problems -->
   <div class="jumbotron problem-card">
-    <h1 class="display-4 sub-heading">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <a class="btn btn-primary btn-lg" href="codex.php?pid=1" role="button">Solve</a>
+    <h1 class="display-4 sub-heading"><?php echo $qname; ?></h1>
+    <p class="lead"><?php echo $q; ?></p>
+    <a class="btn btn-primary btn-lg" href="codex.php?qid=<?php echo $qid; ?>" role="button">Solve</a>
   </div>
+<?php } ?>
+
+</body>
+</html>

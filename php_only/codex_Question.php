@@ -25,7 +25,7 @@
     $_SESSION['sampleOutput'] = $r['testcaseop'];
   } else {
     //Error Location
-    header("Location: ../error.php");
+    //header("Location: ../error.php");
   }
 
   $q=$connection->prepare("select * from `usercodes` where qid=? and uid=?");
