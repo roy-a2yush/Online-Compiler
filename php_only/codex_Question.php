@@ -2,6 +2,7 @@
 
   //including connection file
   include "connection.php";
+  session_start();
 
   //problem query
   $query=$connection->prepare("select * from `questions` where qid=?");
@@ -29,7 +30,7 @@
   }
 
   $q=$connection->prepare("select * from `usercodes` where qid=? and uid=?");
-  $uid =1;
+  $uid = $_SESSION['uid'];
   $q->bind_param("ss",$qid,$uid);
   $q->execute();
   $resu = $q->get_result();
