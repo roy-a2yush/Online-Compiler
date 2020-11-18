@@ -270,11 +270,11 @@ function ajax_store(){
   var res= 16-vhh;
   document.getElementById('bottom-tag').style.height= res+"vh";
 
-  var qid = <?php echo $_SESSION["qid"]; ?>
+  var qid = <?php echo $_SESSION["qid"]; ?> ;
 
 
 
-  var uid=1;
+  var uid=<?php echo $uid;?> ;
 
   $(window).resize(function(){
   var heightofnav = document.getElementById('nav').offsetHeight;

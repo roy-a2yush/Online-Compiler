@@ -27,7 +27,7 @@
       <div class="navbar-nav ml-auto">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="dashboard.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Questions</a>
