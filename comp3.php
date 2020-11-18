@@ -60,7 +60,7 @@
       		<ul style="list-style-type:none;">
             <li type="">
       		  	
-      		  	<a id="log" href=# class="navbar-brand pull-right" style="color:white">Logout</a>
+      		  	<a id="log" href="index.php" class="navbar-brand pull-right" style="color:white">Logout</a>
     		    </li>
        	  </ul>
         </div>
