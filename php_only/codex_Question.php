@@ -1,8 +1,6 @@
 <?php
 
   //including connection file
-  include "connection.php";
-  session_start();
 
   //problem query
   $query=$connection->prepare("select * from `questions` where qid=?");

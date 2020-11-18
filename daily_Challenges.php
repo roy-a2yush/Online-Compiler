@@ -1,6 +1,7 @@
 <?php
-  include 'php_only/connection.php';
-  session_start();
+
+  include 'php_only/checkLogin.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +33,7 @@
             <a class="nav-link" href="#">Questions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Problems</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Editor</a>
+            <a class="nav-link" href="editor.php">Editor</a>
           </li>
           <li class="nav-item dropdown padding-right">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>

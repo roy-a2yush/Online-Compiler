@@ -1,3 +1,5 @@
+<?php include 'php_only/checkLogin.php' ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -24,13 +26,10 @@
             <a class="nav-link active" href="dashboard.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Questions</a>
+            <a class="nav-link" href="daily_Challenges.php">Questions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Problems</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Editor</a>
+            <a class="nav-link" href="codex.php">Editor</a>
           </li>
           <li class="nav-item dropdown padding-right">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>

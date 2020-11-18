@@ -20,7 +20,7 @@
         $_SESSION['email'] = $row['email'];
         $_SESSION['phoneNo'] = $row['phoneNo'];
         $_SESSION['organisation'] = $row['organisation'];
-        header("Location: ../dashboard.html");
+        header("Location: ../dashboard.php");
       } else {
         $error ='Invalid Login Credentials';
         //header("Location: ../index.php?error=$error");

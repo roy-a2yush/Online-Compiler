@@ -1,8 +1,6 @@
 
-<?php 
-  include "connection.php";
+<?php
   include "compilercodes/cfunc.php";
-  session_start();
   $qname=$_SESSION['qname'];
   $qid = $_SESSION['qid'];
   $notest= $_SESSION['notest'];

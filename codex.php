@@ -1,7 +1,9 @@
 <?php
 
   //starting session
-  session_start();
+  include 'php_only/checkLogin.php';
+  if(!isset($_GET['qid']))
+    header('Location: error.php');
   $qid = $_GET['qid'];
   include "php_only/codex_Question.php";
 
@@ -108,13 +110,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Questions</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Problems</a>
+        <a class="nav-link" href="daily_Challenges.php">Questions</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Editor</a>

@@ -1,3 +1,4 @@
+<?php include 'php_only/checkLogin.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,9 +102,8 @@
 </button>
 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
   <div class="navbar-nav">
-    <a class="nav-item nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    <a class="nav-item nav-link" href="#">Questions</a>
-    <a class="nav-item nav-link" href="#">Problems</a>
+    <a class="nav-item nav-link" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link" href="daily_Challenges.php">Questions</a>
     <a class="nav-item nav-link disabled active" href="#" tabindex="-1" aria-disabled="true">Editor</a>
   </div>
 </div>

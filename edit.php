@@ -1,5 +1,5 @@
 <?php
-include "php_only/connection.php";
+include "php_only/checkLogin.php";
 
 ?>
 <!DOCTYPE html>
@@ -16,8 +16,8 @@ include "php_only/connection.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-  
+
+
     <title>codeSmode</title>
 </head>
 <body>
@@ -29,12 +29,12 @@ include "php_only/connection.php";
           </button>
           <ul style="list-style-type:none;">
             <li type="">
-              
+
               <a id="log" href=# class="navbar-brand pull-right" style="color:white">Logout</a>
             </li>
           </ul>
         </div>
-    </nav>  
+    </nav>
     <br><br><br>
     <div class="navbar" style="background-color: black" "color:white">
     <br>
@@ -43,18 +43,18 @@ include "php_only/connection.php";
       <a id ="link" href="edit.php" style="color:white"><b><i>Edit</i></b></a><br>
 </div>
   <br>
-    
-  
+
+
     <div class="card mx-auto">
       <div class="container">
         <div class="card-header text-center" style="background-color: black">
           <b style="color: white">Edit Questions</b>
         </div>
-        <div class="card-body" id="card"> 
+        <div class="card-body" id="card">
           <form method="GET" >
-              
+
               <?php
-              
+
               $query = $db->prepare("SELECT * from `questions`");
               $query->execute();
               $res = $query->get_result();
@@ -63,25 +63,25 @@ include "php_only/connection.php";
               ?>
               <table class="table table-hover" border="black">
               <tr><td ><?php  echo "<a href='comp2.php?id=$qid'>".$row["qname"]."</a><br />"; ?></td></tr>
-              
+
               </table>
 
                 <?php
                 }
                 ?>
-              
-              
+
+
 
 
               <!--   <button type="submit" class="btn btn-primary" formaction="comp3.php" style="background-color: black" "color:white">Next</button></center>
-               -->    
+               -->
           </form>
-           
+
           <br>
-        </div>  
+        </div>
     </div>
 
-  </div>  
-      
+  </div>
+
 </body>
 </html>
