@@ -240,7 +240,7 @@
     <option value="java">Java</option>
     <option value="py">Python</option>
   </select>
-  <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP" id="Check" > <small><span class="text-white">Custom Run</span></small>
+  <input class="text-white ml-1" type="checkbox" id="customipcheck" value="" data-toggle="modal" data-target="#customIP"> <small><label for="customipcheck" class="text-white">Custom Run</label></small>
 <div class="float-right">
     <button align="right" id="runWithoutIP" class="btn btn-m btn-primary" onclick="toogleRun();" data-toggle="modal" data-target="#runButton">Run</button>
     <button align="right" id="submitCode" class="btn btn-m btn-warning" data-toggle="modal" data-target="#submitStatus">Submit</button>
@@ -273,11 +273,11 @@ function ajax_store(){
   var res= 16-vhh;
   document.getElementById('bottom-tag').style.height= res+"vh";
 
-  var qid = <?php echo $_SESSION["qid"]; ?>
+  var qid = <?php echo $_SESSION["qid"]; ?> ;
 
 
 
-  var uid=1;
+  var uid=<?php echo $uid;?> ;
 
   $(window).resize(function(){
   var heightofnav = document.getElementById('nav').offsetHeight;
