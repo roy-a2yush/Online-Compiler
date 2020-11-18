@@ -5,7 +5,7 @@
   if(!empty($_POST['email']) and !empty($_POST['password'])) {
   	$email=trim($_POST['email']);
     $password=trim($_POST['password']);
-    if($email == "admin" && $password == "admin") {
+    if($email == "admin@gmail.com" && $password == "admin") {
       header('Location: adminhome.php');
     } else {
   		$password=md5($password);
