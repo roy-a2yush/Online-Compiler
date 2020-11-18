@@ -118,6 +118,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Editor</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="php_only/logout.php">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>

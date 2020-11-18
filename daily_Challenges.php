@@ -35,11 +35,8 @@
           <li class="nav-item">
             <a class="nav-link" href="editor.php">Editor</a>
           </li>
-          <li class="nav-item dropdown padding-right">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">username</a>
-              <a class="dropdown-item" href="#">logout</a>
+          <li class="nav-item">
+            <a class="nav-link" href="php_only/logout.php">Logout</a>
           </li>
         </ul>
       </div>

@@ -6,7 +6,7 @@
   	$email=trim($_POST['email']);
     $password=trim($_POST['password']);
     if($email == "admin" && $password == "admin") {
-      //goto admin
+      header('Location: adminhome.php');
     } else {
   		$password=md5($password);
       $query=$connection->prepare("select * from `user` where email=? and password=?");
@@ -23,7 +23,7 @@
         header("Location: ../dashboard.php");
       } else {
         $error ='Invalid Login Credentials';
-        //header("Location: ../index.php?error=$error");
+        header("Location: ../index.php?error=$error");
       }
     }
   } else {
