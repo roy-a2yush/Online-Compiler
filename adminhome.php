@@ -37,7 +37,13 @@
   		<a id ="link" href="comp2.php">Add Events</a><br>
   		
   		<a id ="link" href="edit.php">Edit</a><br>
-</div>
+
+		<a id ="link" href="resetPass.php">Reset Password</a><br>
+
+		<a id ="link" href="verifyAccounts.php">Verify Accounts</a><br>
+
+		<a id ="link" href="analytics.php">Analytics</a><br>
+	</div>
 	<br>
   	
   	<div class="card mx-auto">
