@@ -70,36 +70,36 @@ if(isset($_GET['id'])){
   				<b style="color: white">Reset Password</b>
   			</div>
   			<div class="card-body">	
-  				<form method="POST" >
+  				<form method="POST" action="php_only/resetPass.php" >
             <div class="form-group row">
                     <label class="col-2 col-form-label">Enter email-id</label><br>
                     <div class="col-10">
-                        <input class="form-control" type="text" id="questionname" name="questionname" required value = <?php if(isset($qname)) {echo $qname;} ?> >
+                        <input class="form-control" type="text" id="questionname" name="pass" required >
                         
                     </div>
             </div>
             <!--<div class="form-group row">
                     <label class="col-2 col-form-label">Enter the Question</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" id="question" name="question" required value = <?php if(isset($ques)) { echo $ques;} ?> >
+                        <input class="form-control" type="text" id="question" name="question" required value = <?php //if(isset($ques)) { echo $ques;} ?> >
                     </div>
             </div>
             <div class="form-group row">
                     <label class="col-2 col-form-label">Constraints</label>
                     <div class="col-10">
-                       <textarea id="constraints" name="constraints" rows="10" cols="120" required><?php if(isset($constraints)) {echo $constraints ;} ?></textarea> 
+                       <textarea id="constraints" name="constraints" rows="10" cols="120" required><?php //if(isset($constraints)) {echo $constraints ;} ?></textarea> 
                     </div>
             </div>
             <div class="form-group row">
                     <label class="col-2 col-form-label">Enter working code in C</label>
                     <div class="col-10">
-                      <textarea id="codec" name="codec" rows="10" cols="120" required><?php if(isset($ccode)) {echo $ccode;} ?></textarea>
+                      <textarea id="codec" name="codec" rows="10" cols="120" required><?php //if(isset($ccode)) {echo $ccode;} ?></textarea>
                     </div>
             </div>
             <div class="form-group row">
                     <label class="col-2 col-form-label">Enter the number of testcases</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" id="notest" name="notest" required value = <?php if(isset($notest)) {echo $notest;} ?>> 
+                        <input class="form-control" type="text" id="notest" name="notest" required value = <?php //if(isset($notest)) {echo $notest;} ?>> 
                     </div>
             </div>-->
             
@@ -130,11 +130,17 @@ if(isset($_GET['id'])){
                         <input class="form-control" type="text" name="testcases" id="testcases" required>
                     </div>
             </div> -->
-          			<button type="submit" class="btn btn-primary" formaction="comp3.php" style="background-color: black" "color:white">Next</button></center>
+          			<button type="submit" class="btn btn-primary" style="background-color: black" "color:white">Reset</button></center>
                   
-  				</form>
+                  </form>
            
           <br>
+          <?php
+            if(isset($_GET['error'])) {
+                $error = $_GET['error'];
+                echo $error;
+            }
+          ?>
   			</div>	
 		</div>
 
