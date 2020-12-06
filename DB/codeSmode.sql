@@ -31,7 +31,8 @@ CREATE TABLE `overview` (
   `uid` int(11) NOT NULL,
   `qid` int(11) NOT NULL,
   `num_test_case_passed` int(11) NOT NULL,
-  `num_test_case_present` int(11) NOT NULL
+  `num_test_case_present` int(11) NOT NULL,
+  `isCompleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
