@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 10, 2020 at 06:10 PM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.1.33
+-- Host: localhost
+-- Generation Time: Dec 06, 2020 at 02:37 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,8 +18,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `codesmode`
+-- Database: `codeSmode`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `overview`
+--
+
+CREATE TABLE `overview` (
+  `uid` int(11) NOT NULL,
+  `qid` int(11) NOT NULL,
+  `num_test_case_passed` int(11) NOT NULL,
+  `num_test_case_present` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -86,7 +98,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`uid`, `name`, `email`, `phoneNo`, `organisation`, `password`) VALUES
 (1, 'Aayush', 'roy.a2yush@cmrit.ac.in', '9931837670', 'CMRIT', '7da70a24ff2c3ff3cbdae659248647d8'),
-(2, 'Aayush', 'roy.a2yush@zephyr.com', '9931837670', 'Zephyr', '7da70a24ff2c3ff3cbdae659248647d8');
+(2, 'Aayush', 'roy.a2yush@zephyr.com', '9931837670', 'Zephyr', '7da70a24ff2c3ff3cbdae659248647d8'),
+(3, 'Test', 'test@test.test', '9931837670', 'Test', 'dd46a756faad4727fb679320751f6dea');
 
 -- --------------------------------------------------------
 
@@ -153,7 +166,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
