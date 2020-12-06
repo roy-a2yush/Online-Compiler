@@ -3,6 +3,7 @@ include "connection.php";
 $ext = $_POST["ext"];
 chdir("..");
 chdir("UserProgSpace");
+$uid = $_POST["uid"];
 $qid = $_POST["qid"];
 $query = $conn->prepare("select * from `testcases` where qid = ?");
 $query->bind_param("s",$qid);
@@ -45,13 +46,32 @@ while($r = mysqli_fetch_assoc($res)){
 }
 
 $c->clearFiles();
-
+$completed = false;
 if($countreq == $count){
     //correct op
+	$completed = true;
     echo "<div class='bg-success rounded p-3 text-white'> <h5> Congrats, You have passed all testcases!</h5></div>";
 }
 else{
     //wrong op
    echo "<div class='bg-danger rounded p-3 text-white'><h5>Wrong Output:</h5>Oops! You have cleared $count/$countreq testcases! Change Your code and submit again!</div>";
+}
+$checkQuery = $conn->prepare("select * from `overview` where uid=? and qid=?");
+$checkQuery->bind_param("ss",$uid,$qid);
+$checkQuery->execute();
+$res = $checkQuery->get_result();
+if(mysqli_num_rows($res)>=1){
+	$previousHighest = mysqli_fetch_assoc($res);
+	$previousHighestCount = $previousHighest["num_test_case_passed"];
+	if($previousHighestCount<$count){
+		$query = $conn->prepare("update `overview` set `num_test_case_passed` = ? ,`num_test_case_present` = ? , `isCompleted`=? where uid =? and qid=?");
+		$query->bind_param("sssss",$count,$countreq,$completed,$uid,$qid);
+		$query->execute();
+	}
+}
+else{
+$query = $conn->prepare("insert into `overview` values(?,?,?,?,?)");
+$query->bind_param("sssss",$uid,$qid,$count,$countreq,$completed);
+$query->execute();
 }
 ?>

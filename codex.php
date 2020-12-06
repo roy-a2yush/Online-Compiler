@@ -336,7 +336,7 @@ function ajax_run(code,ip,ext) {
     function ajax_sub(code,ext) {
       var hr = new XMLHttpRequest();
       var url = "php_only/subcodex.php";
-      var vars = "code=" + encodeURIComponent(code) + "&ext=" + ext + "&qid="+qid;
+      var vars = "code=" + encodeURIComponent(code) + "&ext=" + ext + "&qid="+qid +"&uid="+uid;
       hr.open("POST", url, true);
       hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       hr.onreadystatechange = function() {

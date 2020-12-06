@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 06, 2020 at 02:37 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Host: 127.0.0.1
+-- Generation Time: Dec 06, 2020 at 05:57 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `codeSmode`
+-- Database: `codesmode`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +35,13 @@ CREATE TABLE `overview` (
   `num_test_case_present` int(11) NOT NULL,
   `isCompleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `overview`
+--
+
+INSERT INTO `overview` (`uid`, `qid`, `num_test_case_passed`, `num_test_case_present`, `isCompleted`) VALUES
+(4, 43, 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +108,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`uid`, `name`, `email`, `phoneNo`, `organisation`, `password`) VALUES
 (1, 'Aayush', 'roy.a2yush@cmrit.ac.in', '9931837670', 'CMRIT', '7da70a24ff2c3ff3cbdae659248647d8'),
 (2, 'Aayush', 'roy.a2yush@zephyr.com', '9931837670', 'Zephyr', '7da70a24ff2c3ff3cbdae659248647d8'),
-(3, 'Test', 'test@test.test', '9931837670', 'Test', 'dd46a756faad4727fb679320751f6dea');
+(3, 'Test', 'test@test.test', '9931837670', 'Test', 'dd46a756faad4727fb679320751f6dea'),
+(4, 'vishwa', 'nkvi17is@cmrit.ac.in', '7904171559', 'cmrit', '6ae4412564234926f32555e7dd3a619f');
 
 -- --------------------------------------------------------
 
@@ -122,11 +131,19 @@ CREATE TABLE `usercodes` (
 --
 
 INSERT INTO `usercodes` (`uid`, `qid`, `ccode`, `javacode`, `cppcode`, `pycode`) VALUES
-(1, 43, '#include<stdio.h>\nvoid main(){\n	\n}', 'class Main{\n	public static void main(String[] args){\n		\n	}\n}', '#include<iostream>\nusing namespace std;\nint main(){\n	\n	return 0;\n}', '#code in python');
+(1, 43, '#include<stdio.h>\nvoid main(){\n	\n}', 'class Main{\n	public static void main(String[] args){\n		\n	}\n}', '#include<iostream>\nusing namespace std;\nint main(){\n	\n	return 0;\n}', '#code in python'),
+(4, 43, '#include<stdio.h>\nvoid main(){\n    printf(\"5\");\n}', 'class Main{\n	public static void main(String[] args){\n		\n	}\n}', '#include<iostream>\nusing namespace std;\nint main(){\n	\n	return 0;\n}', '#code in python');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `overview`
+--
+ALTER TABLE `overview`
+  ADD KEY `fquid` (`uid`),
+  ADD KEY `fqqid` (`qid`);
 
 --
 -- Indexes for table `questions`
@@ -167,11 +184,18 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `overview`
+--
+ALTER TABLE `overview`
+  ADD CONSTRAINT `fqqid` FOREIGN KEY (`qid`) REFERENCES `questions` (`qid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fquid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `testcases`
