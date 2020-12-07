@@ -8,5 +8,5 @@
     if(!$query->execute())
         header("Location: ../resetPass.php?error=Password reset Failed!");
     else
-    header("Location: ../resetPass.php?error=Password reset Successfully!");
+        header("Location: ../resetPass.php?error=Password reset Successfully!");
 ?>
