@@ -1,6 +1,5 @@
 <?php
-include "php_only/connection.php";
-session_start();
+include "php_only/checkAdminLogin.php";
 if(isset($_GET['id'])){
   $qid = $_GET['id'];
   $_SESSION["qid"]= $qid;

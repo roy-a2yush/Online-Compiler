@@ -1,7 +1,6 @@
 <?php 
 
-  include "php_only/connection.php";
-  session_start();
+  include "php_only/checkAdminLogin.php";
   $_SESSION['qname']=$_POST['questionname'];
   $questionname=$_POST['questionname'];
   $question=$_POST['question'];

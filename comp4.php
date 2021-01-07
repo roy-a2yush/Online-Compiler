@@ -1,8 +1,7 @@
 
 <?php 
-  include "config.php";
-  session_start();
-  print_r($_SESSION);
+  include "php_only/checkAdminLogin.php";
+  //print_r($_SESSION);
   $qname=$_SESSION['qname'];
   $testcase1=$_POST['testcase1'];
   $sql="UPDATE `questions` SET `testcase1`='".$testcase1."' WHERE `qname`='".$qname."'";

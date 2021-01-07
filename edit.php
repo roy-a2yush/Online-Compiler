@@ -1,5 +1,5 @@
 <?php
-include "php_only/checkLogin.php";
+include "php_only/checkAdminLogin.php";
 
 ?>
 <!DOCTYPE html>

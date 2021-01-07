@@ -1,7 +1,6 @@
 
 <?php 
-  include "config.php";
-  session_start();
+  include "php_only/checkAdminLogin.php";
   print_r($_SESSION);
   $qname=$_SESSION['qname'];
   $testcase2=$_POST['testcase2'];
