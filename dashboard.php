@@ -32,7 +32,7 @@
             <a class="nav-link" href="codex.php">Editor</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="codex.php">Change Password</a>
+            <a class="nav-link" href="changePass.php">Change Password</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="php_only/logout.php">Logout</a>

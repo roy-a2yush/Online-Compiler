@@ -47,7 +47,7 @@ include "php_only/connection.php";
       		<ul style="list-style-type:none;">
             <li type="">
               
-              <a id="log" href="logout.php" class="navbar-brand pull-right" style="color:white">Logout</a>
+              <a id="log" href="index.php" class="navbar-brand pull-right" style="color:white">Logout</a>
             </li>
           </ul>
        	</div>
@@ -55,17 +55,11 @@ include "php_only/connection.php";
     <br><br><br>
     <div class="navbar" style="background-color: black" "color:white">
     <br>
-    <a id ="link" href="adminhome.php"><b><i>Admin Home</i></b></a><br>
+    	<a id ="link" href="adminhome.php">Admin Home</a><br>
   		
-  		<a id ="link" href="comp2.php">Add Events</a><br>
+  		<a id ="link" href="comp2.php"><b><i>Add Events</i></b></a><br>
   		
   		<a id ="link" href="edit.php">Edit</a><br>
-
-		<a id ="link" href="resetPass.php">Reset Password</a><br>
-
-		<a id ="link" href="verifyAccounts.php">Delete Accounts</a><br>
-
-		<a id ="link" href="analytics.php">Analytics</a><br>
 </div>
 	<br>
   	
@@ -73,10 +67,10 @@ include "php_only/connection.php";
   	<div class="card mx-auto">
   		<div class="container">
   			<div class="card-header text-center" style="background-color: black">
-  				<b style="color: white">Reset Password</b>
+  				<b style="color: white">Delete Account</b>
   			</div>
   			<div class="card-body">	
-  				<form method="POST" action="php_only/resetPass.php" >
+  				<form method="POST" action="php_only/resetPass.php?delete=true" >
             <div class="form-group row">
                     <label class="col-2 col-form-label">Enter email-id</label><br>
                     <div class="col-10">
@@ -136,7 +130,7 @@ include "php_only/connection.php";
                         <input class="form-control" type="text" name="testcases" id="testcases" required>
                     </div>
             </div> -->
-          			<button type="submit" class="btn btn-primary" style="background-color: black" "color:white">Reset</button></center>
+          			<button type="submit" class="btn btn-primary" style="background-color: black" "color:white">Delete</button></center>
                   
                   </form>
            
