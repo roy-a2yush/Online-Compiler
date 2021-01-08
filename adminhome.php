@@ -42,7 +42,7 @@ include "php_only/checkAdminLogin.php";
 
 		<a id ="link" href="resetPass.php">Reset Password</a><br>
 
-		<a id ="link" href="verifyAccounts.php">Verify Accounts</a><br>
+		<a id ="link" href="verifyAccounts.php">Delete Accounts</a><br>
 
 		<a id ="link" href="analytics.php">Analytics</a><br>
 	</div>
