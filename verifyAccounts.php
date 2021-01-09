@@ -78,6 +78,40 @@ include "php_only/connection.php";
                         
                     </div>
             </div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Name" title="Type in a name">
+              <br>
+              <br>
+                <table class="table" id="myTable" style="margin-top: .5rem;">
+                    <tr>
+                        <th>uid</th>
+                        <th>Name</th>
+                        <th>email</th>
+                        <th>phoneNo</th>
+                        <th>Organisation</th>
+                    </tr>
+                    <?php
+
+                        $sql_stmt = "Select * from user";
+                        $result = mysqli_query($db, $sql_stmt);
+                        while ($question = $result->fetch_assoc()) {
+                        $uid = $question['uid'];
+                        $name = $question['name'];
+                        $email = $question['email'];
+                        $phoneNo = $question['phoneNo'];
+                        $organisation = $question['organisation'];
+                    ?>
+                    <tr>
+                        <td><?php echo $uid; ?></td>
+                        <td><?php echo $name; ?></td>
+                        <td><?php echo $email; ?></td>
+                        <td><?php echo $phoneNo; ?></td>
+                        <td><?php echo $organisation; }?></td>
+                    </tr>
+                </table>
+              </div>
+  			</div>
             <!--<div class="form-group row">
                     <label class="col-2 col-form-label">Enter the Question</label>
                     <div class="col-10">
@@ -144,7 +178,27 @@ include "php_only/connection.php";
   			</div>	
 		</div>
 
-	</div>	
+	</div>
+        <script>
+          function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[2];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
+            }
+          }
+        </script>	
       
 </body>
 </html>
