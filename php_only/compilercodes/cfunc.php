@@ -8,7 +8,7 @@ class codeWithC{
           $this->isWindows = true;
         }
         if($this->isWindows)
-        putenv("PATH=C:\Program Files (x86)\CodeBlocks\MinGW\bin");
+        putenv("PATH=C:\Program Files\CodeBlocks\MinGW\bin");
         else {
           chroot(getcwd());
         }
