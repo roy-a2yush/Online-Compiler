@@ -8,7 +8,7 @@ class codeWithJava{
       $this->isWindows = true;
     }
     if($this->isWindows){
-      putenv("PATH=C:\Program Files\Java\jdk1.8.0_221\bin");
+      putenv("PATH=C:\Program Files\Java\jdk1.8.0_251\bin");
     }
     else {
       chroot(getcwd());

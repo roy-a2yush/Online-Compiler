@@ -52,12 +52,12 @@
       Online Compiler
     </div>
     <div class="card-body">
-      <h5 class="card-title no-opactity">Head to our online Compiler</h5>
+      <h5 class="card-title no-opactity">Head to our Online Compiler</h5>
       <p class="card-text no-opactity">Right now we support coding in 4 languages, namely C, C++, Java and Python.</p>
-      <div class="no-opactity"><a href="editor.php" class="btn btn-primary">Go somewhere</a></div>
+      <div class="no-opactity"><a href="editor.php" class="btn btn-primary">Go to Online Compiler</a></div>
     </div>
     <div class="card-footer text-muted no-opactity">
-      2 days ago
+      Runtime environment and code editor
     </div>
   </div>
 
@@ -67,12 +67,12 @@
       Daily Challenges
     </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="daily_Challenges.php" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">Head to the Daily Challenges</h5>
+      <p class="card-text">Daily Challenges are competitive coding problems posted by our team to test yourself.</p>
+      <a href="daily_Challenges.php" class="btn btn-primary">Go to Daily Challenges</a>
     </div>
     <div class="card-footer text-muted">
-      2 days ago
+      Code acceptable in C, C++, Java and python
     </div>
   </div>
 
