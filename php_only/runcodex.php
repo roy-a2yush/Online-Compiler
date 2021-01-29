@@ -50,12 +50,19 @@ $c1->compile();
 $op2 = $c1->execute(false);
 $c1->clearFiles();
 
+
 if(trim($op1) == trim($op2)){
     //correct op
     echo "<div class='bg-success rounded p-3 text-white'> <h5> Correct Output:</h5>$op1</div>";
 }
-else{
-    //wrong op
-   echo "<div class='bg-danger rounded p-3 text-white'><h5>Wrong Output:</h5>$op1</div>";
+else {
+    $op2 = $op2."<br />";
+    if(trim($op1) == trim($op2)) {
+        //correct op
+        echo "<div class='bg-success rounded p-3 text-white'> <h5> Correct Output:</h5>$op1</div>";
+    } else {
+        //wrong op
+        echo "<div class='bg-danger rounded p-3 text-white'><h5>Wrong Output:</h5>$op1!</div>";
+    }
 }
 ?>

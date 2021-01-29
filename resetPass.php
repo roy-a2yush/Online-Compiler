@@ -47,7 +47,7 @@ include "php_only/connection.php";
       		<ul style="list-style-type:none;">
             <li type="">
               
-              <a id="log" href="logout.php" class="navbar-brand pull-right" style="color:white">Logout</a>
+              <a id="log" href="php_only/logout.php" class="navbar-brand pull-right" style="color:white">Logout</a>
             </li>
           </ul>
        	</div>

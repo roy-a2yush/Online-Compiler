@@ -42,7 +42,12 @@ while($r = mysqli_fetch_assoc($res)){
     //echo $op1." ".$realOP."<br>";
     if(trim($op1) == trim($realOP)){
         $count++;
+    } else {
+        $realOP = $realOP."<br />";
+        if(trim($op1) == trim($realOP)) {
+            $count++;
     }
+}
 }
 
 $c->clearFiles();
